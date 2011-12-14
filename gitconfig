@@ -1,0 +1,39 @@
+[user]
+	name = Eric Mueller
+	email = emueller@emcien.com
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+  branch = magenta
+
+[github]
+  user = nevinera
+
+[alias]
+  ar = add -A
+  amend = commit --amend
+  l = log --pretty=oneline --abbrev-commit
+  contains = branch --contains
+  cm = commit -m
+  stat = status
+  d = diff
+  b = branch
+  co = checkout
+  stat = status --short
+  rh = reset --hard
+  r = reset

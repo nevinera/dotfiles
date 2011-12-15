@@ -42,6 +42,10 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+inoremap <c-j> <esc><c-w>j
+inoremap <c-k> <esc><c-w>k
+inoremap <c-h> <esc><c-w>h
+inoremap <c-l> <esc><c-w>l
 
 imap hh =>
 imap jj ->

@@ -1,8 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/nevinera/src/patterns-backend'
-let g:netrw_dirhist_2='/Users/nevinera/src'
-let g:netrw_dirhist_3='/Users/nevinera/src/support'
-let g:netrw_dirhist_4='/Users/nevinera/src/patterns-backend'
-let g:netrw_dirhist_5='/Users/nevinera/src/mix'
-let g:netrw_dirhist_6='/Users/nevinera/src/patterns-backend'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/nevinera/src/engine'

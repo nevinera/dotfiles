@@ -37,6 +37,7 @@ map <leader>R :so $MYVIMRC<cr>
 
 map <leader>j :split<cr><c-j>
 map <leader>l :vsplit<cr><c-l>
+map <leader>k zt<c-y>
 
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -49,3 +50,6 @@ inoremap <c-l> <esc><c-w>l
 
 imap hh =>
 imap jj ->
+imap jk (
+imap kj )
+imap kk <Esc>

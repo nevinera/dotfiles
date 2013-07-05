@@ -77,6 +77,7 @@ autocmd BufWritePre       * :call TrimWhiteSpace()
 autocmd QuickFixCmdPost *grep* cwindow
 
 nnoremap <leader>l :Glog<CR>
+nnoremap <leader>g :Ggrep
 nnoremap <leader>n :cnext<CR>
 nnoremap <leader>p :cprev<CR>
 

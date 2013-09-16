@@ -38,7 +38,6 @@ set smartcase
 
 let mapleader=","
 
-match ErrorMsg '\s\+$'
 function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction

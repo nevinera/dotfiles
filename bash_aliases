@@ -1,4 +1,7 @@
 alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
+alias bar='source ~/.bash_aliases'
+
+alias br='bundle install; bundle clean --force'
 
 alias la='ls -laFGh'
 alias lt='ls -ltr'

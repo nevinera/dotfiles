@@ -21,7 +21,7 @@ set go-=T
 highlight clear SignColumn
 
 set number
-set numberwidth=5
+set numberwidth=4
 set ruler
 
 set nowrap

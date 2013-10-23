@@ -85,7 +85,7 @@ map <leader>t :CtrlP<cr>
 map <leader>m :CtrlPMRU<cr>
 map <leader>b :CtrlPBuffer<cr>
 map <leader>r :CtrlPBuffer<cr><F5><Esc>
-set wildignore+=*/tmp/*,*.o,*.zip,*.tgz
+set wildignore+=*/tmp/*,*.o,*.zip,*.tgz,*/bin/*
 
 nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>

@@ -16,3 +16,5 @@ alias gd='git diff'
 alias gc='git commit -m'
 
 alias tmux="TERM=screen-256color-bce tmux"
+
+alias cds="cd $HOME/src"

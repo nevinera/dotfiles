@@ -1,13 +1,12 @@
 alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
 alias bar='source ~/.bash_aliases'
 
-alias bi='bundle install --jobs 3'
-alias b='bundle exec'
-
-alias gx='open -a SourceTree `gitroot`'
+alias gx='gitk --all'
 
 alias br='bundle install --jobs 3; bundle clean --force'
 alias rerake='rake clean && rake'
+
+alias cds='cd ~/src'
 
 alias la='ls -laFGh'
 alias lt='ls -ltr'

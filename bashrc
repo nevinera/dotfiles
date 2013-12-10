@@ -7,5 +7,5 @@ export MATCH_BUCKET='s3.match.emcien.com'
 source /Users/nevinera/.bash_prompt
 source /Users/nevinera/.bash_aliases
 
-export WARN_ERRORS='-Werror'
+export WARN_ERRORS='-Werror -Wno-format-nonliteral'
 export PATTERNS_TEST_FILES_PATH=/Users/nevinera/data/patterns/test-files

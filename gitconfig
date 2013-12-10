@@ -2,6 +2,10 @@
 	name = Eric Mueller
 	email = emueller@emcien.com
 
+[core]
+  pager = cat
+	excludesfile = /Users/nevinera/.gitignore
+
 [color]
   branch = auto
   diff = auto
@@ -27,7 +31,10 @@
 [alias]
   ar = add -A
   amend = commit --amend
-  l = log --pretty=oneline --abbrev-commit
+  l = log --pretty=oneline --abbrev-commit -n 5
+  ll = log --pretty=oneline --abbrev-commit -n 30
+  lll = log --pretty=oneline --abbrev-commit -n 500
+  lm = log --pretty=oneline --abbrev-commit -n 30 --author=mueller
   contains = branch --contains
   cm = commit -m
   stat = status
@@ -37,3 +44,14 @@
   stat = status --short
   rh = reset --hard
   r = reset
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 40 --date=relative
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+  default = tracking
+[ghi]
+	token = 4ffcbbaaadf3b4d9970190e4fba7f75fc6864ab4

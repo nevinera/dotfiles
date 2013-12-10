@@ -1,6 +1,17 @@
-call pathogen#infect()
-
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-markdown'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'slim-template/vim-slim'
+
 syntax enable
 set encoding=utf-8
 set showcmd

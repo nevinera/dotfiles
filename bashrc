@@ -5,6 +5,7 @@ export MATCH_BUCKET='s3.match.emcien.com'
 
 source /home/nevinera/.bash_prompt
 source /home/nevinera/.bash_aliases
+#source /home/nevinera/.bash_profile
 
 export PATTERNS_TEST_FILES_PATH=/home/nevinera/data/patterns/test-files
 
@@ -16,3 +17,5 @@ shopt -s checkwinsize
 
 PATH=$PATH:$HOME/src/rvm/bin
 export WARN_ERRORS='-Werror -Wno-format-nonliteral'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

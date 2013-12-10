@@ -3,7 +3,7 @@ alias bar='source ~/.bash_aliases'
 
 alias gx='gitk --all'
 
-alias br='bundle install --jobs 3; bundle clean --force'
+alias br='bundle install && bundle clean --force'
 alias rerake='rake clean && rake'
 
 alias cds='cd ~/src'

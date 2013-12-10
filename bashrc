@@ -6,7 +6,6 @@ export MATCH_BUCKET='s3.match.emcien.com'
 source /home/nevinera/.bash_prompt
 source /home/nevinera/.bash_aliases
 
-export WARN_ERRORS='-Werror'
 export PATTERNS_TEST_FILES_PATH=/home/nevinera/data/patterns/test-files
 
 HISTCONTROL=ignoreboth
@@ -16,3 +15,4 @@ shopt -s globstar
 shopt -s checkwinsize
 
 PATH=$PATH:$HOME/src/rvm/bin
+export WARN_ERRORS='-Werror -Wno-format-nonliteral'

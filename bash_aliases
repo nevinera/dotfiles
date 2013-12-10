@@ -1,8 +1,10 @@
 alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
 alias bar='source ~/.bash_aliases'
 
-alias br='bundle install; bundle clean --force'
-alias rerake='bundle exec rake clean && bundle exec rake'
+alias gx='gitk --all'
+
+alias br='bundle install --jobs 3; bundle clean --force'
+alias rerake='rake clean && rake'
 
 alias cds='cd ~/src'
 
@@ -21,3 +23,6 @@ alias gc='git commit -m'
 alias tmux="TERM=screen-256color-bce tmux"
 
 alias cds="cd $HOME/src"
+alias cdpp="cd $HOME/src/patterns"
+alias cde="cd $HOME/src/engine"
+alias cdmx="cd $HOME/src/mix"

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# Rejects commits which check in a focused spec
+
+FILES_PATTERN='\.rb$'
+FORBIDDEN='binding.pry'
+errs = `git diff --cached --name-only | grep -E #{FILES_PATTERN} | xargs grep --with-filename -n #{FORBIDDEN}`
+
+unless errs.empty?
+  puts "Commit rejected. Please correct:"
+  puts errs
+  exit 1
+end

@@ -17,7 +17,7 @@ alias rmr='rm -r'
 alias gitroot='git rev-parse --show-toplevel'
 alias cdr='cd `gitroot`'
 alias stat='git status'
-alias gd='git diff'
+alias gd='git diff -w'
 alias gc='git commit -m'
 
 alias tmux="TERM=screen-256color-bce tmux"

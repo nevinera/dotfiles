@@ -9,6 +9,10 @@ source /home/nevinera/.bash_aliases
 source /home/nevinera/.bash_profile
 source /etc/bash_completion
 
+# ~/.bash_local is for things that I don't want in source control,
+# either because they are secret, or because they don't apply to other machines.
+[[ -s "$HOME/.bash_local" ]] && source "$HOME/.bash_local"
+
 export PATTERNS_TEST_FILES_PATH=/home/nevinera/data/patterns/test-files
 
 HISTCONTROL=ignoreboth

@@ -53,5 +53,3 @@
 	trustExitCode = true
 [push]
   default = tracking
-[ghi]
-	token = 4ffcbbaaadf3b4d9970190e4fba7f75fc6864ab4

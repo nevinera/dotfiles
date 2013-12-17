@@ -35,6 +35,24 @@ set number
 set numberwidth=4
 set ruler
 
+" Folding
+set foldmethod=syntax
+set foldminlines=2
+set foldlevelstart=99
+
+highlight Folded term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
+highlight FoldColumn term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
+
+set foldtext=MyFoldFunction()
+set fillchars=fold:\ ,vert:\|
+
+function! MyFoldFunction()
+  let line = getline(v:foldstart)
+  let lastline = getline(v:foldend)
+  let numfolded = v:foldend - v:foldstart + 1
+  return line . ' ' . ' [' . numfolded . ' L]' . lastline
+endfunction
+
 set nowrap
 set tabstop=2 shiftwidth=2
 set expandtab
@@ -125,3 +143,7 @@ map Y y$
 " reselect blocks after indenting/dedenting
 vnoremap < <gv
 vnoremap > >gv
+
+nmap <space> za
+nmap <nul> zA
+nmap <leader><space> zM

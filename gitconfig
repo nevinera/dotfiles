@@ -4,7 +4,7 @@
 
 [core]
   pager = cat
-	excludesfile = /home/nevinera/.gitignore
+	excludesfile = ~/.gitignore
 
 [color]
   branch = auto
@@ -31,10 +31,10 @@
 [alias]
   ar = add -A
   amend = commit --amend
-  l = log --pretty=oneline --abbrev-commit -n 5
-  ll = log --pretty=oneline --abbrev-commit -n 30
-  lll = log --pretty=oneline --abbrev-commit -n 500
-  lm = log --pretty=oneline --abbrev-commit -n 30 --author=mueller
+  l   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 5
+  ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 30
+  lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 500
+  lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 30 --author=mueller
   contains = branch --contains
   cm = commit -m
   stat = status

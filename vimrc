@@ -50,7 +50,7 @@ function! MyFoldFunction()
   let line = getline(v:foldstart)
   let lastline = getline(v:foldend)
   let numfolded = v:foldend - v:foldstart + 1
-  return line . ' ' . ' [' . numfolded . ' L]' . lastline
+  return line . ' ' . ' [' . numfolded . ' L] ' . lastline
 endfunction
 
 set nowrap
@@ -144,6 +144,5 @@ map Y y$
 vnoremap < <gv
 vnoremap > >gv
 
-nmap <space> za
-nmap <nul> zA
-nmap <leader><space> zM
+nmap <space> zA
+nmap <nul> zM

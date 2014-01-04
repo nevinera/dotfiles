@@ -22,7 +22,7 @@ shopt -s globstar
 shopt -s checkwinsize
 
 PATH=$PATH:$HOME/src/rvm/bin
-export WARN_ERRORS='-Werror -Wno-format-nonliteral'
+export WARN_ERRORS='-Werror'
 
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

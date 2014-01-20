@@ -42,6 +42,7 @@ set foldlevelstart=99
 
 highlight Folded term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
 highlight FoldColumn term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
+hi StatusLine ctermbg=4
 
 set foldtext=MyFoldFunction()
 set fillchars=fold:\ ,vert:\|
@@ -137,6 +138,10 @@ inoremap <c-l> <esc><c-w>l
 
 imap hh =>
 imap jj ->
+imap jk <esc>
+imap kj <esc>
+imap <F1> <esc>
+nmap <F1> <esc>
 
 map Y y$
 

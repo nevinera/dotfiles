@@ -29,3 +29,5 @@ alias cde="cd $HOME/src/engine"
 alias cdmx="cd $HOME/src/mix"
 
 alias tunnel="autossh -R 12345:localhost:22 nevinera@nevinera.net -N 2 -f"
+
+alias sysperf='sudo perf_3.12 record -a -g sleep 30; perf_3.12 report --sort comm,dso'

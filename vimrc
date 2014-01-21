@@ -147,6 +147,8 @@ imap hh =>
 imap jj ->
 imap jk <esc>
 imap kj <esc>
+imap kl (
+imap lk )
 
 map Y y$
 

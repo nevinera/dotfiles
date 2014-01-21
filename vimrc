@@ -22,6 +22,14 @@ set laststatus=2
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml
 
+autocmd FocusLost * call PopOutOfInsertMode()
+
+function! PopOutOfInsertMode()
+  if v:insertmode
+    feedkeys("\<C-\>\<C-n>")
+  endif
+endfunction
+
 set backupdir=/tmp
 set directory=/tmp
 
@@ -137,6 +145,8 @@ inoremap <c-l> <esc><c-w>l
 
 imap hh =>
 imap jj ->
+imap jk <esc>
+imap kj <esc>
 
 map Y y$
 

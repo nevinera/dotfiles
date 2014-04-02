@@ -22,6 +22,9 @@ set laststatus=2
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml
 
+" ruby path if you are using RVM
+let g:ruby_path = system('rvm current')
+
 set backupdir=/tmp
 set directory=/tmp
 
@@ -36,7 +39,7 @@ set numberwidth=4
 set ruler
 
 " Folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldminlines=2
 set foldlevelstart=99
 
@@ -142,6 +145,8 @@ imap jk <esc>
 imap kj <esc>
 imap <F1> <esc>
 nmap <F1> <esc>
+
+imap <c-c> <esc>
 
 map Y y$
 

@@ -25,6 +25,14 @@ au BufRead,BufNewFile *.hamlc set ft=haml
 " ruby path if you are using RVM
 let g:ruby_path = system('rvm current')
 
+autocmd FocusLost * call PopOutOfInsertMode()
+
+function! PopOutOfInsertMode()
+  if v:insertmode
+    feedkeys("\<C-\>\<C-n>")
+  endif
+endfunction
+
 set backupdir=/tmp
 set directory=/tmp
 
@@ -143,6 +151,7 @@ imap hh =>
 imap jj ->
 imap jk <esc>
 imap kj <esc>
+
 imap <F1> <esc>
 nmap <F1> <esc>
 

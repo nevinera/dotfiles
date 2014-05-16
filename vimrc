@@ -23,6 +23,9 @@ set laststatus=2
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml
 
+" ruby path if you are using RVM
+let g:ruby_path = system('rvm current')
+
 autocmd FocusLost * call PopOutOfInsertMode()
 
 function! PopOutOfInsertMode()
@@ -51,6 +54,7 @@ set foldlevelstart=99
 
 highlight Folded term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
 highlight FoldColumn term=bold ctermbg=10 ctermfg=5 guibg=bg guifg=fg
+hi StatusLine ctermbg=4
 
 set foldtext=MyFoldFunction()
 set fillchars=fold:\ ,vert:\|
@@ -154,6 +158,8 @@ inoremap <c-c> <esc>
 
 imap hh =>
 imap jj ->
+imap <F1> <esc>
+nmap <F1> <esc>
 
 map Y y$
 

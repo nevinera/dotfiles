@@ -11,6 +11,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-markdown'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'slim-template/vim-slim'
+Bundle 'skalnik/vim-vroom'
 
 syntax enable
 set encoding=utf-8
@@ -44,7 +45,7 @@ set numberwidth=4
 set ruler
 
 " Folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldminlines=2
 set foldlevelstart=99
 
@@ -101,9 +102,13 @@ function! s:RunShellCommand(cmdline)
 endfunction
 
 
-let g:gitroot = system("git rev-parse --show-toplevel")
-map <leader>S :exec "Shell rspec -f d " . g:gitroot<CR>
-map <leader>s :Shell rspec -f d %<CR>
+" let g:gitroot = system("git rev-parse --show-toplevel")
+" map <leader>S :exec "Shell rspec -f d " . g:gitroot<CR>
+" map <leader>s :Shell rspec -f d %<CR>
+
+let g:vroom_use_colors = 1
+map <leader>s :call vroom#RunTestFile({'options':'--color -f d'})<cr>
+map <leader>S :call vroom#RunNearestTest({'options':'--color -f d'})<cr>
 
 autocmd FileWritePre      * :call TrimWhiteSpace()
 autocmd FileAppendPre     * :call TrimWhiteSpace()
@@ -143,12 +148,12 @@ inoremap <c-k> <esc><c-w>k
 inoremap <c-h> <esc><c-w>h
 inoremap <c-l> <esc><c-w>l
 
+inoremap <c-d> <esc>
+nnoremap <c-d> <esc>
+inoremap <c-c> <esc>
+
 imap hh =>
 imap jj ->
-imap jk <esc>
-imap kj <esc>
-imap kl (
-imap lk )
 
 map Y y$
 

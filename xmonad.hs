@@ -9,6 +9,7 @@ import XMonad.Actions.PhysicalScreens
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Reflect
 import XMonad.Layout.Accordion
+import XMonad.Util.Replace
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -31,6 +32,7 @@ myLayout = avoidStruts $
 
 main = do
     status <- spawnPipe "xmobar"
+    replace
     xmonad $ defaultConfig {
         focusFollowsMouse       = False,
         borderWidth		= 2,
@@ -43,10 +45,11 @@ main = do
         logHook             = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn status, ppUrgent = xmobarColor "yellow" "red" }
         } `additionalKeys` [
           ((mod1Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock"),
-          ((mod1Mask .|. shiftMask, xK_o), spawn "chromium"),
+          ((mod1Mask .|. shiftMask, xK_o), spawn "google-chrome-stable"),
           ((mod1Mask .|. shiftMask, xK_u), spawn "uzbl-browser"),
           ((mod1Mask, xK_h), viewScreen 0),
           ((mod1Mask, xK_l), viewScreen 1),
+          ((mod1Mask .|. shiftMask, xK_r), restart "/home/nevinera/bin/obtoxmd" True),
           ((mod1Mask .|. shiftMask, xK_h), sendMessage Shrink),
           ((mod1Mask .|. shiftMask, xK_l), sendMessage Expand)
         ]

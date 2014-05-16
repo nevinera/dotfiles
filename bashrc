@@ -22,6 +22,7 @@ shopt -s globstar
 shopt -s checkwinsize
 
 PATH=$PATH:$HOME/src/rvm/bin
+PATH=$HOME/bin:$PATH
 export WARN_ERRORS='-Werror'
 
 

@@ -1,13 +1,15 @@
 alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
 alias bar='source ~/.bash_aliases'
 alias md5=md5sum
+alias disk='sftp emueller@internal.emcien.com@disk.internal.emcien.com'
+alias mdisk='gvfs-mount afp://emueller@disk.internal.emcien.com/Emcien'
 
 alias gx='gitk --all'
+alias gti='git'
 
 alias br='bundle install && bundle clean --force'
 alias rerake='rake clean && rake'
-
-alias cds='cd ~/src'
+alias worker='rake resque:work TERM_CHILD=1 QUEUE=*'
 
 alias la='ls -laFGh'
 alias lt='ls -ltr'
@@ -23,11 +25,19 @@ alias gc='git commit -m'
 
 alias tmux="TERM=screen-256color-bce tmux"
 
+alias cdd="cd $HOME/data"
 alias cds="cd $HOME/src"
 alias cdpp="cd $HOME/src/patterns"
 alias cde="cd $HOME/src/engine"
+alias cdeo="cd $HOME/src/mcn-engine-mix"
 alias cdmx="cd $HOME/src/mix"
+alias cdsc="cd $HOME/src/scout"
+alias cdsub="cdr && cd ext/engine"
 
 alias tunnel="autossh -R 12345:localhost:22 nevinera@nevinera.net -N 2 -f"
 
 alias sysperf='sudo perf_3.12 record -a -g sleep 30; perf_3.12 report --sort comm,dso'
+alias perf='perf_3.12'
+
+alias pbcopy='xclip -selection clipboard'
+alias pspec="RAILS_ENV=config/test.json rspec"

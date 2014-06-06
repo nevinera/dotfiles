@@ -1,7 +1,6 @@
 export PATTERNS_SERVER_ID='nev3'
 export PATTERNS_ROOT='/home/nevinera/.patterns-data'
 
-export MATCH_BUCKET='s3.match.emcien.com'
 export EDITOR='vim'
 
 source /home/nevinera/.bash_prompt
@@ -24,6 +23,6 @@ shopt -s checkwinsize
 PATH=$PATH:$HOME/src/rvm/bin
 export WARN_ERRORS='-Werror'
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 unset GNOME_KEYRING_CONTROL
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

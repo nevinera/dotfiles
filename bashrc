@@ -6,7 +6,6 @@ export EDITOR='vim'
 
 source /home/nevinera/.bash_prompt
 source /home/nevinera/.bash_aliases
-source /home/nevinera/.bash_profile
 source /etc/bash_completion
 
 # ~/.bash_local is for things that I don't want in source control,
@@ -22,6 +21,8 @@ shopt -s globstar
 shopt -s checkwinsize
 
 PATH=$PATH:$HOME/src/rvm/bin
+source $HOME/src/rvm/scripts/rvm
+
 PATH=$HOME/bin:$PATH
 export WARN_ERRORS='-Werror'
 

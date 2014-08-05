@@ -1,17 +1,18 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-markdown'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'slim-template/vim-slim'
-Bundle 'skalnik/vim-vroom'
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-markdown'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'slim-template/vim-slim'
+Plugin 'skalnik/vim-vroom'
+call vundle#end()
 
 syntax enable
 set encoding=utf-8

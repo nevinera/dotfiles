@@ -29,3 +29,6 @@ export WARN_ERRORS='-Werror'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 unset GNOME_KEYRING_CONTROL
+
+# added by travis gem
+[ -f /home/nevinera/.travis/travis.sh ] && source /home/nevinera/.travis/travis.sh

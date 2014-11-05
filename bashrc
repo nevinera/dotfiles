@@ -23,6 +23,9 @@ shopt -s checkwinsize
 [ -d $HOME/src/rvm/bin ] && PATH=$PATH:$HOME/src/rvm/bin
 [ -f $HOME/src/rvm/scripts/rvm ] && source $HOME/src/rvm/scripts/rvm
 
+[ -d $HOME/.rvm/bin ] && PATH=$PATH:$HOME/.rvm/bin
+[ -f $HOME/.rvm/scripts/rvm ] && source $HOME/.rvm/scripts/rvm
+
 PATH=$HOME/bin:$PATH
 export WARN_ERRORS='-Werror'
 

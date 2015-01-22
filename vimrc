@@ -20,6 +20,9 @@ set showcmd
 filetype plugin indent on
 
 set laststatus=2
+if has("mouse")
+  set mouse=a
+endif
 
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml

@@ -11,6 +11,8 @@ alias show='jira show -c'
 alias comment='jira comment'
 alias sprint='jira sprint -c'
 alias mine='jira list open "creator=currentUser()" -c -o "created asc"'
+alias start='jira start'
+alias finish='jira finish'
 
 alias ubuntu="ssh nevinera@nevinera.vm.emcien.com"
 alias ubuntu="ssh nevinera@10.1.1.62"

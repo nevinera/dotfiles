@@ -9,7 +9,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-markdown'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
 Plugin 'skalnik/vim-vroom'
 call vundle#end()
@@ -26,6 +26,9 @@ endif
 
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml
+au BufWinEnter *.rb let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+au BufWinEnter *.md let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+au BufWinEnter *.haml let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 
 " ruby path if you are using RVM
 let g:ruby_path = system('rvm current')
@@ -46,10 +49,6 @@ set go-=r
 set go-=L
 set go-=T
 highlight clear SignColumn
-
-set number
-set numberwidth=4
-set ruler
 
 " Folding
 set foldmethod=indent
@@ -109,14 +108,35 @@ function! s:RunShellCommand(cmdline)
   1
 endfunction
 
+set lazyredraw
 
-" let g:gitroot = system("git rev-parse --show-toplevel")
-" map <leader>S :exec "Shell rspec -f d " . g:gitroot<CR>
-" map <leader>s :Shell rspec -f d %<CR>
+" Syntastic config
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs = 1
 
-let g:vroom_use_colors = 1
-map <leader>s :call vroom#RunTestFile({'options':'--color -f d'})<cr>
-map <leader>S :call vroom#RunNearestTest({'options':'--color -f d'})<cr>
+
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_c_compiler = 'gcc-4.8'
+let g:syntastic_c_no_include_search = 1
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_quiet_messages = { "file:p": ['\m\.h$'] }
+
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-s> :SyntasticCheck<CR>
+" :SyntasticToggleMode<CR>
+
+" map <leader>? :SyntasticCheck<CR>
+" map <leader>s :lnext<CR>
+" map <leader>S :lprev<CR>
+
+" set number
+" set numberwidth=4
+set ruler
+
 
 autocmd FileWritePre      * :call TrimWhiteSpace()
 autocmd FileAppendPre     * :call TrimWhiteSpace()
@@ -127,15 +147,13 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 nnoremap <leader>l :Glog<CR>
 nnoremap <leader>g :Ggrep
-nnoremap <leader>n :cnext<CR>
-nnoremap <leader>p :cprev<CR>
 
 let g:ctrlp_working_path_mode = 'r'
 map <leader>t :CtrlP<cr>
 map <leader>m :CtrlPMRU<cr>
 map <leader>b :CtrlPBuffer<cr>
 map <leader>r :CtrlPBuffer<cr><F5><Esc>
-set wildignore+=*/tmp/*,*.o,*.zip,*.tgz,*/bin/*
+set wildignore+=*/tmp/*,*.o,*.zip,*.tgz
 
 nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>
@@ -150,6 +168,7 @@ map <leader>l :vsplit<cr><c-l>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
+nnoremap <bs>  <c-w>h
 nnoremap <c-l> <c-w>l
 inoremap <c-j> <esc><c-w>j
 inoremap <c-k> <esc><c-w>k

@@ -31,16 +31,14 @@
 [alias]
   ar = add -A
   amend = commit --amend
-  l   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 5
-  ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 30
-  lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 500
-  lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%an%x09%Creset%s" --date=short -n 30 --author=mueller
+  l   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 5
+  ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30
+  lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 500
+  lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30 --author=mueller
   contains = branch --contains
   cm = commit -m
   cs = commit-summary
   cc = commit-contents
-  stat = status
-  d = diff
   b = branch
   co = checkout
   stat = status --short
@@ -50,6 +48,9 @@
   p = pull
   pul = pull
   pt = push --tags
+  fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
+  fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
+  cp = "!f() { git log -n 1 --pretty=format:\"%H\" | pbcopy; }; f"
 
 [push]
   default = tracking

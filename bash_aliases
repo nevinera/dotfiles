@@ -13,7 +13,7 @@ alias start_mysql='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.
 
 alias ab="rvm system do with_anybar"
 
-alias jira='mcn_ruby $HOME/src/jira/bin/jira'
+alias jira='rvm 2.1.5@mcn do $HOME/src/jira/bin/jira'
 alias list='jira list -c'
 alias todo='jira list todo -c'
 alias show='jira show -c'

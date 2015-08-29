@@ -44,13 +44,13 @@
   stat = status --short
   rh = reset --hard
   r = reset
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 40 --date=relative --date-order
+  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 40 --date=relative --date-order
   p = pull
   pul = pull
   pt = push --tags
   fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
   fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
-  cp = "!f() { git log -n 1 --pretty=format:\"%H\" | pbcopy; }; f"
+  cp = "!f() { git log -n 1 --pretty=format:\"%H\" | cut -c 1-8 | tr -d '\n' | pbcopy; }; f"
 
 [push]
   default = tracking

@@ -41,7 +41,7 @@ alias sshi='ssh -i ~/.ssh/engineering-key'
 alias scpi='scp -i ~/.ssh/engineering-key'
 alias fls='tree -d -L 2 $HOME/src/force/sys'
 
-alias ubuntu="ssh nevinera@10.1.1.62"
+alias ubuntu="ssh nevinera@10.1.1.242"
 
 alias gx='gitk --all'
 alias gti='git'
@@ -95,6 +95,7 @@ alias cdgs="cd $GOPATH/src"
 
 alias cdd="cd $HOME/data"
 alias cds="cd $HOME/src"
+alias cdb="cd $HOME/src/bandit"
 alias cdi="cd $HOME/src/iso_latte"
 alias cdc="cd $HOME/src/citadel"
 alias cdj="cd $HOME/src/jira"
@@ -115,6 +116,7 @@ alias cdeo="cd $HOME/src/mcn-engine-mix"
 alias cdmx="cd $HOME/src/mix"
 alias cdsc="cd $HOME/src/scout"
 alias cdsub="cdr && cd ext/engine"
+alias cdw="cd $HOME/src/workbench"
 
 alias master="git checkout master"
 

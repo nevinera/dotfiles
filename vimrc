@@ -138,10 +138,20 @@ nnoremap <C-s> :SyntasticCheck<CR>
 set ruler
 
 
-autocmd FileWritePre      * :call TrimWhiteSpace()
-autocmd FileAppendPre     * :call TrimWhiteSpace()
-autocmd FilterWritePre    * :call TrimWhiteSpace()
-autocmd BufWritePre       * :call TrimWhiteSpace()
+autocmd FileWritePre      *.rb :call TrimWhiteSpace()
+autocmd FileAppendPre     *.rb :call TrimWhiteSpace()
+autocmd FilterWritePre    *.rb :call TrimWhiteSpace()
+autocmd BufWritePre       *.rb :call TrimWhiteSpace()
+
+autocmd FileWritePre      *.md :call TrimWhiteSpace()
+autocmd FileAppendPre     *.md :call TrimWhiteSpace()
+autocmd FilterWritePre    *.md :call TrimWhiteSpace()
+autocmd BufWritePre       *.md :call TrimWhiteSpace()
+
+autocmd FileWritePre      *.haml :call TrimWhiteSpace()
+autocmd FileAppendPre     *.haml :call TrimWhiteSpace()
+autocmd FilterWritePre    *.haml :call TrimWhiteSpace()
+autocmd BufWritePre       *.haml :call TrimWhiteSpace()
 
 autocmd QuickFixCmdPost *grep* cwindow
 

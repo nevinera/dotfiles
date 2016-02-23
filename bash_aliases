@@ -1,19 +1,20 @@
-alias vi=nvim
-alias vim=nvim
-alias ba='nvim ~/.bash_aliases; source ~/.bash_aliases'
+alias vi=vim
+alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
 alias bar='source ~/.bash_aliases'
 alias md5=md5sum
-alias disk='sftp emueller@internal.emcien.com@disk.internal.emcien.com'
+alias disk='yafc emueller@disk.internal.emcien.com'
+alias empire='yafc sftp://emueller@empire.internal.emcien.com'
+alias repub='yafc sftp://emueller@republic.internal.emcien.com'
 alias mdisk='gvfs-mount afp://emueller@disk.internal.emcien.com/Emcien'
 alias linesum='awk '"'"'{s+=$1} END {print s}'"'"
-alias nvupdate='brew update && brew reinstall --HEAD neovim'
+alias ldd='otool -L'
 
 alias stop_mysql='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
 alias start_mysql='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
 
 alias ab="rvm system do with_anybar"
 
-alias jira='rvm 2.1.5@mcn do $HOME/src/jira/bin/jira'
+alias jira='rvm 2.2@jira do $HOME/src/jira/bin/jira'
 alias list='jira list -c'
 alias todo='jira list todo -c'
 alias show='jira show -c'
@@ -41,7 +42,10 @@ alias sshi='ssh -i ~/.ssh/engineering-key'
 alias scpi='scp -i ~/.ssh/engineering-key'
 alias fls='tree -d -L 2 $HOME/src/force/sys'
 
-alias ubuntu="ssh nevinera@10.1.1.242"
+export NABOO="dev-emueller@naboo.server.emcien.com"
+alias naboo="ssh dev-emueller@naboo.server.emcien.com"
+export JAKKU="emueller@jakku.server.emcien.com"
+alias jakku="ssh emueller@jakku.server.emcien.com"
 
 alias gx='gitk --all'
 alias gti='git'
@@ -61,6 +65,7 @@ alias rerake='rake clean && rake -m -j 4'
 alias prake='rake -m -j 4'
 alias remake='make clean && make'
 alias worker='rake resque:work TERM_CHILD=1 QUEUE=*'
+alias resque='rake resque:work TERM_CHILD=1 QUEUE=*'
 alias egrind='valgrind --trace-children=yes --num-callers=50 --error-limit=no --partial-loads-ok=yes --undef-value-errors=no'
 alias relock="git checkout HEAD -- Gemfile.lock; bundle install && bundle clean --force"
 
@@ -108,15 +113,18 @@ alias cdre="cd $HOME/src/rules_extractor"
 alias cdpe="cd $HOME/src/prediction_extractor"
 alias cdbe="cd $HOME/src/extractor"
 alias cdpp="cd $HOME/src/patterns"
+alias cdp17="cd $HOME/src/patterns-17"
 alias cdpat="cd $HOME/src/pat"
 alias cde="cd $HOME/src/engine"
 alias cde2="cd $HOME/src/engine-2"
+alias cde3="cd $HOME/src/engine-3"
 alias cdx="cd $HOME/src/extract"
 alias cdeo="cd $HOME/src/mcn-engine-mix"
 alias cdmx="cd $HOME/src/mix"
 alias cdsc="cd $HOME/src/scout"
 alias cdsub="cdr && cd ext/engine"
 alias cdw="cd $HOME/src/workbench"
+alias cdss="cd $HOME/src/scan"
 
 alias master="git checkout master"
 
@@ -143,3 +151,9 @@ function gspec {
 
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
+alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
+alias cdt='cd  "$(\ls -1dt ./*/ | head -n 1)"'
+alias cd.='cd ..'
+alias cd..='cd ../..'
+alias cd...='cd ../../..'
+alias cols='column -t -s,'

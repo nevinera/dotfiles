@@ -4,7 +4,7 @@
 
 [core]
   pager = cat
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/nevinera/.gitignore_global
 
 [color]
   branch = auto
@@ -51,6 +51,15 @@
   fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
   fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
   cp = "!f() { git log -n 1 --pretty=format:\"%H\" | cut -c 1-8 | tr -d '\n' | pbcopy; }; f"
+  ch = cherry-pick
 
 [push]
   default = tracking
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[web]
+	browser = open

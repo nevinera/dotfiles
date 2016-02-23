@@ -5,7 +5,10 @@ export MATCH_BUCKET='s3.match.emcien.com'
 export EDITOR='vim'
 export GCC=gcc-4.8
 
-export JAVA_HOME=`/usr/libexec/java_home`
+export TERM_CHILD=1
+export SKIP_SHARD_CLEANUP=1
+
+# export JAVA_HOME=`/usr/libexec/java_home`
 export EC2_HOME='/usr/local/ec2/ec2-api-tools-1.7.3.2/'
 
 source $HOME/.bash_prompt
@@ -17,6 +20,9 @@ source $HOME/.bash_aliases
 [ -f "$HOME/.bash_local" ] && source "$HOME/.bash_local"
 
 export PATTERNS_TEST_FILES_PATH=$HOME/data/patterns/test-files
+
+complete -o "default" -W "$(find $HOME/src/force/sys -maxdepth 2 -mindepth 2 -type f -name '*.yml' -exec basename -s '.yml' {} \;)" ffh
+complete -o "default" -W "$(find $HOME/src/force/sys -maxdepth 1 -mindepth 1 -type f -name '*.yml' -exec basename -s '.yml' {} \;)" ffs
 
 
 HISTCONTROL=ignoreboth

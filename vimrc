@@ -9,7 +9,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-markdown'
-Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
 Plugin 'skalnik/vim-vroom'
 call vundle#end()

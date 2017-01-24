@@ -1,10 +1,10 @@
 [user]
 	name = Eric Mueller
-	email = emueller@emcien.com
+	email = nevinera@gmail.com
 
 [core]
   pager = cat
-	excludesfile = /Users/nevinera/.gitignore_global
+	excludesfile = ~/.gitignore
 
 [color]
   branch = auto
@@ -50,8 +50,7 @@
   pt = push --tags
   fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
   fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
-  cp = "!f() { git log -n 1 --pretty=format:\"%H\" | cut -c 1-8 | tr -d '\n' | pbcopy; }; f"
-  ch = cherry-pick
+  cp = cherry-pick
 
 [push]
   default = tracking
@@ -63,3 +62,5 @@
 	trustExitCode = true
 [web]
 	browser = open
+[http]
+	postBuffer = 524288000

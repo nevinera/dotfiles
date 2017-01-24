@@ -6,11 +6,13 @@ call vundle#begin()
 
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'wincent/command-t'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-markdown'
 Plugin 'slim-template/vim-slim'
 Plugin 'skalnik/vim-vroom'
+Plugin 'scrooloose/syntastic'
 call vundle#end()
 
 syntax enable
@@ -68,6 +70,9 @@ function! MyFoldFunction()
   return line . ' ' . ' [' . numfolded . ' L] ' . lastline
 endfunction
 
+nmap <space> za
+nmap <nul> zM
+
 set nowrap
 set tabstop=2 shiftwidth=2
 set expandtab
@@ -111,29 +116,29 @@ set lazyredraw
 
 " Syntastic config
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
-
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_haml_checkers = ['haml_lint']
-let g:syntastic_c_compiler = 'gcc-4.8'
-let g:syntastic_c_no_include_search = 1
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_enable_highlighting = 0
-let g:syntastic_quiet_messages = { "file:p": ['\m\.h$'] }
 
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': [] }
+
 nnoremap <C-s> :SyntasticCheck<CR>
+map <leader>, :SyntasticCheck<CR>
+map <leader>. :lclose<CR>
+
 " :SyntasticToggleMode<CR>
 
 " map <leader>? :SyntasticCheck<CR>
 " map <leader>s :lnext<CR>
 " map <leader>S :lprev<CR>
 
-" set number
-" set numberwidth=4
+set number
+set numberwidth=3
 set ruler
 
 
@@ -157,12 +162,35 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <leader>l :Glog<CR>
 nnoremap <leader>g :Ggrep
 
+" I do this WAY too often
+command Write write
+command Wq wq
+command WQ wq
+
+let g:ctrlp_user_command = 'cd %s && git ls-files'
 let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_mruf_relative = 1
+
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
 map <leader>t :CtrlP<cr>
 map <leader>m :CtrlPMRU<cr>
 map <leader>b :CtrlPBuffer<cr>
 map <leader>r :CtrlPBuffer<cr><F5><Esc>
-set wildignore+=*/tmp/*,*.o,*.zip,*.tgz
+
+map <leader>x :e `git rev-parse --show-toplevel`<cr>
+
+" let g:CommandTMaxFiles=100000
+" let g:CommandTMaxCachedDirectories=0
+
+" map <leader>t :CommandT<cr>
+" map <leader>b :CommandTBuffer<cr>
+" map <leader>m :CommandTMRU<cr>
+
+set wildignore+=*/tmp/*,*.o,*.zip,*.tgz,*/node_modules/*,*/bower_components/*
 
 nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>
@@ -198,6 +226,3 @@ map Y y$
 " reselect blocks after indenting/dedenting
 vnoremap < <gv
 vnoremap > >gv
-
-nmap <space> zA
-nmap <nul> zM

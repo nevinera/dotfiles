@@ -17,7 +17,7 @@ function parse_git_branch {
   diverge_pattern="Your branch and (.*) have diverged"
 
   state=""
-  if [[ ! ${git_status} =~ "working directory clean" ]]; then
+  if [[ ! ${git_status} =~ "working tree clean" ]]; then
     state="${RED}Z"
   fi
   # add an else if or two here if you want to get more specific

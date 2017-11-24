@@ -1,0 +1,1 @@
+bind return:cmd move screenOriginX;screenOriginY screenSizeX;screenSizeY

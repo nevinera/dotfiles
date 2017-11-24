@@ -1,23 +1,27 @@
 #! /usr/bin/env bash
 
-alias vi=vim
+alias vi=nvim
+alias vim=nvim
 alias ba='vim ~/.bash_aliases; source ~/.bash_aliases'
 alias bar='source ~/.bash_aliases'
 alias md5=md5sum
 
 alias stop_mysql='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
 alias start_mysql='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
+alias stand='vim ~/standups.md'
 
 alias gti='git'
+alias it='git'
 
 alias gcm="git commit -m"
 alias gcf="OVERCOMMIT_DISABLE=1 git commit -m"
 alias gcp="OVERCOMMIT_DISABLE=1 git push"
 alias be='bundle exec'
-alias br='bundle install --jobs 6 && bundle clean --force'
+alias br='bundle install --jobs 6 && bundle clean --force && yarn install'
 alias rerake='rake clean && rake -m -j 4'
 alias prake='rake -m -j 4'
 alias remake='make clean && make'
+alias migrate='rake db:migrate; rake db:migrate RAILS_ENV=test'
 
 alias la='ls -laFGh'
 alias lt='ls -ltr'

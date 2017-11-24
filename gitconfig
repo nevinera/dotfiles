@@ -51,6 +51,7 @@
   fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
   fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
   cp = cherry-pick
+  recent = "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
 
 [push]
   default = tracking
@@ -64,3 +65,8 @@
 	browser = open
 [http]
 	postBuffer = 524288000
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -24,6 +24,7 @@ HISTFILESIZE=2000000
 # shopt -s globstar
 shopt -s checkwinsize
 
+PATH=$PATH:./bin
 [ -d $HOME/src/go ] && export GOPATH=$HOME/src/go
 [ -d $HOME/src/rvm/bin ] && PATH=$PATH:$HOME/src/rvm/bin
 [ -f $HOME/src/rvm/scripts/rvm ] && source $HOME/src/rvm/scripts/rvm
@@ -53,3 +54,7 @@ export UT_TOOLS_FILENAME=/Users/emueller/.ssh/config
 export UT_TOOLS_INDENTATION='  '
 export UT_TOOLS_ITERM_COLORS=TRUE
 export JUMP_LOG='/tmp/jump.log'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

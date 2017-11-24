@@ -1,19 +1,30 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set runtimepath+=/Users/emueller/.vim/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state('/Users/emueller/.vim/dein')
+  call dein#begin('/Users/emueller/.vim/dein')
 
-Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'wincent/command-t'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-markdown'
-Plugin 'slim-template/vim-slim'
-Plugin 'skalnik/vim-vroom'
-Plugin 'scrooloose/syntastic'
-call vundle#end()
+  " Let dein manage dein
+  call dein#add('/Users/emueller/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  " To perform installs: `call dein#install()`
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('tpope/vim-markdown')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('vim-ruby/vim-ruby')
+  call dein#add('isRuslan/vim-es6')
+  " call dein#add('skalnik/vim-vroom')
+  " call dein#add('kchmck/vim-coffee-script')
+  " call dein#add('slim-template/vim-slim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
 syntax enable
 set encoding=utf-8

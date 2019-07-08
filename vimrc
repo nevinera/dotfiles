@@ -17,8 +17,9 @@ if dein#load_state('/Users/emueller/.vim/dein')
   call dein#add('scrooloose/syntastic')
   call dein#add('vim-ruby/vim-ruby')
   call dein#add('isRuslan/vim-es6')
+  call dein#add('leafgarland/typescript-vim')
   " call dein#add('skalnik/vim-vroom')
-  " call dein#add('kchmck/vim-coffee-script')
+  call dein#add('kchmck/vim-coffee-script')
   " call dein#add('slim-template/vim-slim')
 
   " Required:

@@ -74,6 +74,67 @@ alias sql_tunnel_bobteam='ssh -N -L 13306:mysql-primary.orders-bobteam.qa.userte
 alias sql_tunnel_insights='ssh -N -L 13306:mysql-primary.orders-insights.qa.usertesting.com:3306 orders-insights+bastion2'
 alias check_sql_tunnel='nc -z localhost 13306 || echo "No tunnel open on 13306"'
 
+#prods3video HANDLE
+function prods3video {
+  echo aws s3 ls s3://uploader-production-app-videoinboxs3bucket-4nnebdwlhi2h/$1
+  aws s3 ls s3://uploader-production-app-videoinboxs3bucket-4nnebdwlhi2h/$1
+  echo aws s3 ls s3://ut-production-video-processing/pending/$1
+  aws s3 ls s3://ut-production-video-processing/pending/$1
+  echo aws s3 ls s3://ut-videos-secure/$1
+  aws s3 ls s3://ut-videos-secure/$1
+  echo aws s3 ls s3://ut-processed-files-secure/$1
+  aws s3 ls s3://ut-processed-files-secure/$1
+  echo aws s3 ls s3://ut-production-sensitive-archive/$1
+  aws s3 ls s3://ut-production-sensitive-archive/$1
+}
+
+function stagings3video {
+  echo aws s3 ls s3://ut-staging-video-processing/pending/$1
+  aws s3 ls s3://ut-staging-video-processing/pending/$1
+  echo aws s3 ls s3://ut-videos-dev/$1
+  aws s3 ls s3://ut-videos-dev/$1
+  echo aws s3 ls s3://ut-processed-files-dev/$1
+  aws s3 ls s3://ut-processed-files-dev/$1
+  echo aws s3 ls s3://ut-staging-sensitive-archive/$1
+  aws s3 ls s3://ut-staging-sensitive-archive/$1
+  echo aws s3 ls s3://ut-downloads-dev/$1
+  aws s3 ls s3://ut-downloads-dev/$1
+}
+
+# sls bucket-name object/key/prefix
+function sls {
+  echo aws s3 ls s3://$1/$2
+  aws s3 ls s3://$1/$2
+}
+
+# sget bucket-name object/key/prefix
+function sget {
+  echo aws s3 cp s3://$1/$2 /tmp/
+  aws s3 cp s3://$1/$2 /tmp/
+}
+
+alias s3="aws s3"
+
+# s3probe s3://ut-production-video-processing/pending/FILENAME
+# (usually supplied by `prods3video HANDLE`)
+function s3probe {
+  echo "=======> listing uri '$1'"
+  aws s3 ls $1
+  echo ""
+
+  echo "=======> signing uri '$1'"
+  signed=`aws s3 presign $1`
+  echo "  $signed"
+  echo ""
+
+  echo "======> ffprobe '$signed'"
+  ffprobe "$signed"
+}
+
+function s3cat {
+  aws s3 cp $1 -
+}
+
 function lint {
   eslint . --format unix | grep $1
 }

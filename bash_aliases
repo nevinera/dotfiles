@@ -17,11 +17,11 @@ alias gcm="git commit -m"
 alias gcf="OVERCOMMIT_DISABLE=1 git commit -m"
 alias gcp="OVERCOMMIT_DISABLE=1 git push"
 alias be='bundle exec'
-alias br='bundle install --jobs 6 && bundle clean --force && yarn install'
+alias br='bundle install --no-binstubs --jobs 6 && bundle clean --force && yarn install'
 alias rerake='rake clean && rake -m -j 4'
 alias prake='rake -m -j 4'
 alias remake='make clean && make'
-alias migrate='rake db:migrate; rake db:migrate RAILS_ENV=test'
+alias migrate='bundle exec rake db:migrate; bundle exec rake db:migrate RAILS_ENV=test'
 
 alias la='ls -laFGh'
 alias lt='ls -ltr'

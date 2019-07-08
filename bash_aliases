@@ -40,9 +40,10 @@ alias diss='diff --side-by-side --suppress-common-lines'
 ############## Navigation stuff
 alias cds="cd $HOME/src"
 alias cdt="cd $HOME/src/ut_tools"
+alias cdtf="cd $HOME/src/teflon"
 alias cdo="cd $HOME/src/orders"
 alias cdv="cd $HOME/src/video-player"
-alias cdp="cd $HOME/src/private-panel"
+alias cdp="cd $HOME/src/video_processor"
 alias cdu="cd $HOME/src/uploader"
 alias cdc="cd $HOME/src/census"
 alias cdd="cd $HOME/src/deployer"

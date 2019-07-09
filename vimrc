@@ -1,12 +1,19 @@
 set nocompatible
 filetype off
 
-set runtimepath+=/Users/emueller/.vim/dein/repos/github.com/Shougo/dein.vim
-if dein#load_state('/Users/emueller/.vim/dein')
-  call dein#begin('/Users/emueller/.vim/dein')
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
   " Let dein manage dein
-  call dein#add('/Users/emueller/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   " Add or remove your plugins here:
   " To perform installs: `call dein#install()`
@@ -38,6 +45,7 @@ if has("mouse")
 endif
 
 au BufNewFile,BufRead *.jbuilder set filetype=ruby
+au BufNewFile,BufRead *.rake set filetype=ruby
 au BufRead,BufNewFile *.hamlc set ft=haml
 au BufWinEnter *.rb let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 au BufWinEnter *.md let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)

@@ -1,10 +1,10 @@
 [user]
-	name = Eric Mueller
-	email = nevinera@gmail.com
+  name = Eric Mueller
+  email = nevinera@gmail.com
 
 [core]
   pager = cat
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 
 [color]
   branch = auto
@@ -35,7 +35,6 @@
   ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30
   lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 500
   lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30 --author=mueller
-  contains = branch --contains
   cm = commit -m
   cs = commit-summary
   cc = commit-contents
@@ -47,26 +46,12 @@
   lg = log --color --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 40 --date=relative --date-order
   p = pull
   pul = pull
-  pt = push --tags
-  fm = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short --grep=\"$1\"; }; f"
-  fc = "!f() { git log --pretty=tformat:'%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s' --decorate --date=short -S\"$1\"; }; f"
   cp = cherry-pick
   recent = "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
 
 [push]
   default = tracking
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [web]
-	browser = open
+  browser = open
 [http]
-	postBuffer = 524288000
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  postBuffer = 524288000

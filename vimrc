@@ -22,13 +22,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('tpope/vim-markdown')
   call dein#add('scrooloose/syntastic')
-  call dein#add('vim-ruby/vim-ruby')
-  call dein#add('isRuslan/vim-es6')
-  call dein#add('leafgarland/typescript-vim')
   call dein#add('elixir-editors/vim-elixir')
-  " call dein#add('skalnik/vim-vroom')
-  call dein#add('kchmck/vim-coffee-script')
-  " call dein#add('slim-template/vim-slim')
 
   " Required:
   call dein#end()

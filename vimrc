@@ -239,6 +239,7 @@ inoremap <c-c> <esc>
 
 imap hh =>
 imap jj ->
+imap jk \|>
 imap <F1> <esc>
 nmap <F1> <esc>
 

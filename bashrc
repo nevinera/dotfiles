@@ -19,3 +19,4 @@ shopt -s checkwinsize
 
 PATH=$PATH:./bin
 PATH=$PATH:$HOME/bin
+PATH=$PATH:/usr/local/bin

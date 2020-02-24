@@ -1,6 +1,10 @@
 set nocompatible
 filetype off
 
+if &compatible
+  set nocompatible
+endif
+
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
@@ -21,8 +25,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('tpope/vim-markdown')
-  call dein#add('scrooloose/syntastic')
-  call dein#add('elixir-editors/vim-elixir')
 
   " Required:
   call dein#end()
@@ -60,7 +62,6 @@ endfunction
 set backupdir=/tmp
 set directory=/tmp
 
-colorscheme ir_black
 set go-=r
 set go-=L
 set go-=T

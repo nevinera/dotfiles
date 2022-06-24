@@ -48,6 +48,7 @@
   pul = pull
   cp = cherry-pick
   recent = "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
+  pickaxe = "log -p -S"
 
 [push]
   default = tracking

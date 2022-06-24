@@ -5,19 +5,16 @@ if &compatible
   set nocompatible
 endif
 
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+colorscheme ir_black
 
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
+set runtimepath+=/Users/emueller/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('/Users/emueller/.cache/dein')
+  call dein#begin('/Users/emueller/.cache/dein')
 
   " Let dein manage dein
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/Users/emueller/.cache/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
-
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
 
   " Add or remove your plugins here:
   " To perform installs: `call dein#install()`
@@ -25,6 +22,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('tpope/vim-markdown')
+
+  " call dein#add('vim-ruby/vim-ruby')
+  call dein#add('dense-analysis/ale')
 
   " Required:
   call dein#end()
@@ -50,6 +50,18 @@ au BufWinEnter *.haml let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 
 " ruby path if you are using RVM
 let g:ruby_path = system('rvm current')
+
+" let vim-ruby indentation match standardrb
+" let g:ruby_indent_assignment_style = 'variable'
+
+" configure ale with standardrb
+let g:ale_linters = {'ruby': ['standardrb']}
+let g:ale_fixers = {'ruby': ['standardrb']}
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '->'
+
+highlight ALEWarning gui=undercurl cterm=undercurl
+highlight ALEError gui=undercurl cterm=undercurl
 
 autocmd FocusLost * call PopOutOfInsertMode()
 
@@ -198,6 +210,7 @@ map <leader>b :CtrlPBuffer<cr>
 map <leader>r :CtrlPBuffer<cr><F5><Esc>
 
 map <leader>x :e `git rev-parse --show-toplevel`<cr>
+map <leader>f :ALEFix<CR>
 
 " let g:CommandTMaxFiles=100000
 " let g:CommandTMaxCachedDirectories=0

@@ -21,9 +21,33 @@ alias gd='git diff -w'
 alias gc='git commit -m'
 alias gdc='git diff --cached'
 alias diss='diff --side-by-side --suppress-common-lines'
+alias dupl="git checkout origin/CTI--ruby-3--working --"
+
+alias be='bundle exec'
+alias br='bundle install && bundle clean --force'
+alias yr='yarn install && yarn run packages:build:dev:nx'
+alias cc='codeclimate analyze --engine structure --engine rubocop'
+alias buc='bundle update --conservative'
+alias bump_rails='bundle update --conservative rails railties actioncable actionmailbox actionmailer actionpack actiontext actionview activejob activemodel activerecord activestorage activesupport'
+
+alias redis_clear='redis-cli flushall'
+
+function bucc {
+  echo "Updating $1 from $2 to $3"
+  bundle update --conservative $1
+  git add Gemfile.lock
+  if [ $# -eq 3 ]
+    then git commit -m "bump $1 from $2 -> $3"
+    else git commit -m "bump $1 from $2 -> $3 ($4)"
+  fi
+  git diff HEAD^..HEAD
+}
 
 ############## Navigation stuff
 alias cds="cd $HOME/src"
+alias cdo="cd $HOME/src/orders"
+alias cdt="cd $HOME/src/ut-translator"
+alias cde="cd $HOME/src/teston-exporter"
 
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
@@ -48,3 +72,38 @@ alias s3="aws s3"
 function s3cat {
   aws s3 cp $1 -
 }
+
+function s3tags {
+  aws s3api get-object-tagging --bucket $1 --key $2
+}
+
+function rubo {
+  rubocop "$@"
+  standardrb "$@"
+}
+
+function fix {
+  standardrb --fix --only $1
+  git add -A
+  git commit -m "fix $1"
+  standardrb | tail
+}
+
+export AWS_PROFILE=engineering
+
+# AWS SSO aliases
+alias aws_login="aws sso login --profile default"
+alias aws_ls="aws configure list-profiles"
+alias awsv="aws-vault exec engineering --"
+
+function aws_pwd {
+  echo "Current profile: ${AWS_PROFILE}"
+}
+
+function aws_profile {
+  NEWPROFILE=$1
+  echo "Profile was previously: ${AWS_PROFILE}"
+  export AWS_PROFILE=${NEWPROFILE}
+  echo "Changed profile to ${AWS_PROFILE}"
+}
+

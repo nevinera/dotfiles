@@ -1,5 +1,0 @@
-bind return:cmd move screenOriginX;screenOriginY screenSizeX;screenSizeY
-bind up:cmd move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
-bind down:cmd move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
-bind right:shift;cmd move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
-bind left:shift;cmd move screenOriginX;screenOriginY screenSizeX/2;screenSizeY

@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-HASH=${1:-HEAD}
-FINAL=${2:-$HASH}
-git diff -w -M60 --ignore-blank-lines --color --name-status $HASH^..$FINAL

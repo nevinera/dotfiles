@@ -1,3 +1,5 @@
+export PATH="$HOME/bin:$PATH"
+
 fpath+=($HOME/.zsh/pure)
 
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash

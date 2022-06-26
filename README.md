@@ -10,4 +10,7 @@
   - `touch ~/.zsh/env_local` - this is for non-committed tokens and such
 * `git/`
   - `config` -> `~/.gitconfig`
-
+* `bin/`
+  - `git-churn` -> `~/bin/git-churn`
+  - `git-commit-contents` -> `~/bin/git-commit-contents`
+  - `git-commit-summary` -> `~/bin/git-commit-summary`

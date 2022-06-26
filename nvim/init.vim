@@ -42,13 +42,14 @@ inoremap <c-c> <esc>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <bs> <c-w>h
+nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 inoremap <c-j> <esc><c-w>j
 inoremap <c-k> <esc><c-w>k
 inoremap <c-h> <esc><c-w>h
 inoremap <c-l> <esc><c-w>l
 map <leader>j :split<cr><c-j>
-map <leader>l :vsplit<cr>c-l>
+map <leader>l :vsplit<cr><c-l>
 
 " file navigation
 let g:fzf_mru_relative = 1 

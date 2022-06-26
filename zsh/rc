@@ -1,0 +1,17 @@
+fpath+=($HOME/.zsh/pure)
+
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+source ~/.zsh/env_local
+source $HOME/.zsh/aliases
+
+autoload -Uz compinit && compinit
+autoload -U promptinit; promptinit
+prompt pure
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+eval "$(nodenv init -)"
+
+export SQUAD_NAME="customer_tech_initiatives"

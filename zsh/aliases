@@ -84,6 +84,28 @@ function rubo {
   standardrb "$@"
 }
 
+function rn {
+  rspec $(git ls-files --modified --others spec | grep '_spec\.rb$')
+  echo ""
+  echo "Ran spec files currently being changed:"
+  git ls-files --modified --others spec | grep '_spec\.rb$'
+}
+
+function list_branch_changed_files {
+  (git ls-files --modified --others --full-name; git diff --name-only --relative $(git merge-base master HEAD)) | sort | uniq
+}
+
+function list_branch_changed_specs {
+  list_branch_changed_files | grep '^spec/.*_spec\.rb$'
+}
+
+function ra {
+  rspec $(list_branch_changed_specs)
+  echo ""
+  echo "Ran spec files changed in branch:"
+  list_branch_changed_specs
+}
+
 function fix {
   standardrb --fix --only $1
   git add -A

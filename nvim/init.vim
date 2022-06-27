@@ -54,7 +54,7 @@ map <leader>l :vsplit<cr><c-l>
 " file navigation
 let g:fzf_mru_relative = 1 
 let g:fzf_mru_exclude_current_file = 0
-map <leader>t :FZF<cr>
+map <leader>t :GFiles<cr>
 map <leader>n :GFiles<cr>
 map <leader>m :FZFMru<cr>
 map <leader>x :e `git rev-parse --show-toplevel`<cr>

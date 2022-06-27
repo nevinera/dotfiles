@@ -49,6 +49,7 @@ alias cds="cd $HOME/src"
 alias cdo="cd $HOME/src/orders"
 alias cdt="cd $HOME/src/ut-translator"
 alias cde="cd $HOME/src/teston-exporter"
+alias cdd="cd $HOME/src/dotfiles"
 
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"

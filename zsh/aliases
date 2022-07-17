@@ -85,10 +85,30 @@ function rubo {
 }
 
 function rn {
-  rspec $(git ls-files --modified --others spec | grep '_spec\.rb$')
-  echo ""
-  echo "Ran spec files currently being changed:"
-  git ls-files --modified --others spec | grep '_spec\.rb$'
+  if [ $# -eq 0 ]
+  then
+    echo "Running these changed spec files:"
+    git ls-files --modified --others spec | grep '_spec\.rb$'
+    echo ""
+    echo ""
+
+    rspec $(git ls-files --modified --others spec | grep '_spec\.rb$')
+    echo ""
+    echo ""
+    echo "Ran spec files currently being changed:"
+    git ls-files --modified --others spec | grep '_spec\.rb$'
+  else
+    echo "Running spec files currently being changed, matching '$1':"
+    git ls-files --modified --others spec | grep '_spec\.rb$'
+    echo ""
+    echo ""
+
+    rspec -e $1 $(git ls-files --modified --others spec | grep '_spec\.rb$')
+    echo ""
+    echo ""
+    echo "Ran spec files currently being changed, matching '$1':"
+    git ls-files --modified --others spec | grep '_spec\.rb$'
+  fi
 }
 
 function list_branch_changed_files {
@@ -100,7 +120,14 @@ function list_branch_changed_specs {
 }
 
 function ra {
+  echo "Running changed specs for the branch:"
+  list_branch_changed_specs
+  echo ""
+  echo ""
+
   rspec $(list_branch_changed_specs)
+
+  echo ""
   echo ""
   echo "Ran spec files changed in branch:"
   list_branch_changed_specs

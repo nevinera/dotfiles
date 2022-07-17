@@ -54,6 +54,7 @@ map <leader>l :vsplit<cr><c-l>
 " file navigation
 let g:fzf_mru_relative = 1 
 let g:fzf_mru_exclude_current_file = 0
+let g:fzf_mru_no_sort = 1 " keep sorted by recency while filtering
 map <leader>t :GFiles<cr>
 map <leader>n :GFiles<cr>
 map <leader>m :FZFMru<cr>

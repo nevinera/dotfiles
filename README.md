@@ -14,3 +14,4 @@
   - `git-churn` -> `~/bin/git-churn`
   - `git-commit-contents` -> `~/bin/git-commit-contents`
   - `git-commit-summary` -> `~/bin/git-commit-summary`
+* `kitty/` -> `~/.config/kitty/`

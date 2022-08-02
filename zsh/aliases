@@ -41,7 +41,7 @@ function bucc {
     then git commit -m "bump $1 from $2 -> $3"
     else git commit -m "bump $1 from $2 -> $3 ($4)"
   fi
-  git diff HEAD^..HEAD
+  git diff HEAD\^..HEAD
 }
 
 ############## Navigation stuff
@@ -84,54 +84,8 @@ function rubo {
   standardrb "$@"
 }
 
-function rn {
-  if [ $# -eq 0 ]
-  then
-    echo "Running these changed spec files:"
-    git ls-files --modified --others spec | grep '_spec\.rb$'
-    echo ""
-    echo ""
-
-    rspec $(git ls-files --modified --others spec | grep '_spec\.rb$')
-    echo ""
-    echo ""
-    echo "Ran spec files currently being changed:"
-    git ls-files --modified --others spec | grep '_spec\.rb$'
-  else
-    echo "Running spec files currently being changed, matching '$1':"
-    git ls-files --modified --others spec | grep '_spec\.rb$'
-    echo ""
-    echo ""
-
-    rspec -e $1 $(git ls-files --modified --others spec | grep '_spec\.rb$')
-    echo ""
-    echo ""
-    echo "Ran spec files currently being changed, matching '$1':"
-    git ls-files --modified --others spec | grep '_spec\.rb$'
-  fi
-}
-
-function list_branch_changed_files {
-  (git ls-files --modified --others --full-name; git diff --name-only --relative $(git merge-base master HEAD)) | sort | uniq
-}
-
-function list_branch_changed_specs {
-  list_branch_changed_files | grep '^spec/.*_spec\.rb$'
-}
-
-function ra {
-  echo "Running changed specs for the branch:"
-  list_branch_changed_specs
-  echo ""
-  echo ""
-
-  rspec $(list_branch_changed_specs)
-
-  echo ""
-  echo ""
-  echo "Ran spec files changed in branch:"
-  list_branch_changed_specs
-}
+alias rn="run_specs"
+alias ra="run_specs --branch"
 
 function fix {
   standardrb --fix --only $1

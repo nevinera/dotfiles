@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+require "open3"
+require "optparse"
+require "pry"
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Run the spec files that have _changed_."
+  opts.on("-b", "--branch", "Changes since branched") { options[:branch] = true }
+  opts.on("-v", "--verbose", "Use rspec's doc format output") { options[:verbose] = true }
+  opts.on("-d", "--dry-run", "Don't actually execute rspec") { options[:dry_run] = true }
+end.parse!
+
+example_matchers = ARGV
+
+def text_from(*command)
+  stdout_str, status = Open3.capture2(*command)
+  fail("Command failed with #{status.to_i}: #{command.join(' ')}") unless status.success?
+  stdout_str
+end
+
+def lines_from(*command)
+  text_from(*command).split("\n").map(&:strip)
+end
+
+changed_spec_files = lines_from("git", "ls-files", "--modified", "--deduplicate", "--others", "--full-name", "spec")
+if options[:branch]
+  # No easy way to get the default branch name just from git :-\
+  merge_base = text_from("git", "merge-base", "master", "HEAD").strip
+  changed_spec_files += lines_from("git", "diff", "--name-only", "--relative", merge_base, "spec/")
+end
+
+spec_files = changed_spec_files.select { |p| p =~ /_spec\.rb$/ }.uniq.sort
+spec_files = spec_files.select { |f| File.exist?(f) }
+
+if spec_files.empty?
+  warn "No changed spec files found!"
+  exit 0
+end
+
+if options[:branch]
+  warn "Executing changed specs in branch:"
+else
+  warn "Executing currently changed specs:"
+end
+spec_files.each { |p| warn "  * #{p}" }
+
+if example_matchers.any?
+  warn "Filtered by matchers:"
+  example_matchers.each { |m| puts "  * #{m}" }
+end
+
+warn "\n\n"
+
+rspec_command = ["rspec"]
+rspec_command << "--format=documentation" if options[:verbose]
+example_matchers.each { |em| rspec_command += ["-e", em] }
+rspec_command += spec_files
+warn rspec_command.join(' ')
+
+exit(0) if options[:dry_run]
+
+exec(*rspec_command)

@@ -36,3 +36,6 @@
   - `git-commit-contents` -> `~/bin/git-commit-contents`
   - `git-commit-summary` -> `~/bin/git-commit-summary`
 * `kitty/` -> `~/.config/kitty/`
+
+The `~/.zsh/env_local` needs `UTT_BEARER_TOKEN` set.
+The `~/src/orders/.env.local` needs `ZOOM_API_KEY|SECRET` and `OKTA_API_TOKEN`

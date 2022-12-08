@@ -47,6 +47,7 @@ function bucc {
 ############## Navigation stuff
 alias cds="cd $HOME/src"
 alias cdo="cd $HOME/src/orders"
+alias cdu="cd $HOME/src/uploader"
 alias cdt="cd $HOME/src/ut-translator"
 alias cde="cd $HOME/src/teston-exporter"
 alias cdd="cd $HOME/src/dotfiles"

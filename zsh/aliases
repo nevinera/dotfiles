@@ -135,3 +135,7 @@ function aws_profile {
   echo "Changed profile to ${AWS_PROFILE}"
 }
 
+function ecs_console {
+  bundle exec ut_ecs $1 console -- -- --noautocomplete
+}
+alias ecc=ecs_console

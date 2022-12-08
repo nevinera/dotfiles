@@ -96,8 +96,19 @@ function rubo {
   standardrb "$@"
 }
 
-alias rn="run_specs"
-alias ra="run_specs --branch"
+alias rn="bundle exec run_specs"
+alias ra="bundle exec run_specs --branch"
+alias cg="check_gem"
+
+function check_gem {
+  echo "======= running rspec"
+  bundle exec rspec
+  echo "======= running rubocop"
+  bundle exec rubocop
+  echo "======= running standardrb"
+  bundle exec standardrb
+  echo "======= complete"
+}
 
 function fix {
   standardrb --fix --only $1

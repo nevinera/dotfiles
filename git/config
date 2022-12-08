@@ -48,7 +48,7 @@
   rbb = reset HEAD^^
   rbbb = reset HEAD^^^
   wip = commit -am "WIP"
-  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 40 --date=relative --date-order
+  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 25 --date=relative --date-order
   p = pull
   pul = pull
   cp = cherry-pick

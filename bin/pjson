@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "json"
+
+text = $stdin.read
+data = JSON.parse(text)
+puts JSON.pretty_generate(data)

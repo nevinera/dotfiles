@@ -22,6 +22,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'dense-analysis/ale'
+Plug 'wellle/context.vim'
 call plug#end()
 
 
@@ -112,3 +113,8 @@ function! MyFoldFunction()
 endfunction
 
 nmap <space> za
+
+
+" -------- context --------
+let g:context_enabled = 0
+nnoremap <c-;> :ContextToggle<cr>

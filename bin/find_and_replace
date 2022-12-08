@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+find_string = ARGV.shift
+new_string = ARGV.shift
+
+$stdin.each_line do |line|
+  relative_path = line.strip
+  path = File.expand_path(relative_path)
+
+  content = File.read(path)
+  new_content = content.gsub(find_string, new_string)
+
+  if content == new_content
+    warn "No changes to #{relative_path}"
+  else
+    File.write(path, new_content)
+    warn "Updated #{relative_path}"
+  end
+end

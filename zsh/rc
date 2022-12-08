@@ -18,3 +18,8 @@ eval "$(nodenv init -)"
 
 export SQUAD_NAME="customer_tech_initiatives"
 export EDITOR=nvim
+
+# Appends every command to the history file once it is executed
+setopt inc_append_history
+# Reloads the history whenever you use it
+setopt share_history

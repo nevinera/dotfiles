@@ -52,6 +52,17 @@ alias cdt="cd $HOME/src/ut-translator"
 alias cde="cd $HOME/src/teston-exporter"
 alias cdd="cd $HOME/src/dotfiles"
 
+function cdg {
+  cd $HOME/src/orders/gems/$1
+}
+
+alias cdn="cdg ut_rspec_support"
+alias cdgz="cdg zoom_api"
+alias cdgb="cdg backend_monorepo"
+alias cdgd="cdg business_domain"
+alias cdgt="cdg table_stats"
+alias cdgq="cdg ut_quality"
+
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
 alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"

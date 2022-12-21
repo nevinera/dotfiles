@@ -49,19 +49,26 @@ alias cds="cd $HOME/src"
 alias cdo="cd $HOME/src/orders"
 alias cdu="cd $HOME/src/uploader"
 alias cdt="cd $HOME/src/ut-translator"
-alias cde="cd $HOME/src/teston-exporter"
 alias cdd="cd $HOME/src/dotfiles"
 
 function cdg {
   cd $HOME/src/orders/gems/$1
 }
 
+function cde {
+  cd $HOME/src/orders/engines/$1
+}
+
 alias cdn="cdg ut_rspec_support"
+
+alias cdgs="cdg s3-credentials"
 alias cdgz="cdg zoom_api"
 alias cdgb="cdg backend_monorepo"
 alias cdgd="cdg business_domain"
 alias cdgt="cdg table_stats"
 alias cdgq="cdg ut_quality"
+
+alias cdem="cde meeting_providers"
 
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"

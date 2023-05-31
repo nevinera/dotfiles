@@ -22,71 +22,22 @@ alias gd='git diff -w'
 alias gc='git commit -m'
 alias gdc='git diff --cached'
 alias diss='diff --side-by-side --suppress-common-lines'
-alias dupl="git checkout origin/CTI--ruby-3--working --"
 
 alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
-alias yr='yarn install && yarn run packages:build:dev:nx'
-alias cc='codeclimate analyze --engine structure --engine rubocop'
 alias buc='bundle update --conservative'
-alias bump_rails='bundle update --conservative rails railties actioncable actionmailbox actionmailer actionpack actiontext actionview activejob activemodel activerecord activestorage activesupport'
 
 alias redis_clear='redis-cli flushall'
-
-function bucc {
-  echo "Updating $1 from $2 to $3"
-  bundle update --conservative $1
-  git add Gemfile.lock
-  if [ $# -eq 3 ]
-    then git commit -m "bump $1 from $2 -> $3"
-    else git commit -m "bump $1 from $2 -> $3 ($4)"
-  fi
-  git diff HEAD\^..HEAD
-}
-
-############## Navigation stuff
-alias cds="cd $HOME/src"
-alias cdo="cd $HOME/src/orders"
-alias cdu="cd $HOME/src/uploader"
-alias cdt="cd $HOME/src/ut-translator"
-alias cdd="cd $HOME/src/dotfiles"
-
-function cdg {
-  cd $HOME/src/orders/gems/$1
-}
-
-function cde {
-  cd $HOME/src/orders/engines/$1
-}
-
-alias cdn="cdg ut_rspec_support"
-
-alias cdgs="cdg s3-credentials"
-alias cdgz="cdg zoom_api"
-alias cdgb="cdg backend_monorepo"
-alias cdgd="cdg business_domain"
-alias cdgt="cdg table_stats"
-alias cdgq="cdg ut_quality"
-
-alias cdem="cde meeting_providers"
-
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
 alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
-
 alias cols='column -t -s,'
 
-# sls bucket-name object/key/prefix
-function sls {
-  echo aws s3 ls s3://$1/$2
-  aws s3 ls s3://$1/$2
-}
-
-# sget bucket-name object/key/prefix
-function sget {
-  echo aws s3 cp s3://$1/$2 /tmp/
-  aws s3 cp s3://$1/$2 /tmp/
-}
+############## Navigation stuff
+alias cds="cd $HOME/src"
+alias cdd="cd $HOME/src/dotfiles"
+alias cde="cd $HOME/src/environment_helpers"
+alias cdq="cd $HOME/src/quiet_quality"
 
 alias s3="aws s3"
 
@@ -97,52 +48,3 @@ function s3cat {
 function s3tags {
   aws s3api get-object-tagging --bucket $1 --key $2
 }
-
-function rubo {
-  rubocop "$@"
-  standardrb "$@"
-}
-
-alias rn="bundle exec run_specs"
-alias ra="bundle exec run_specs --branch"
-alias cg="check_gem"
-
-function check_gem {
-  echo "======= running rspec"
-  bundle exec rspec
-  echo "======= running rubocop"
-  bundle exec rubocop
-  echo "======= running standardrb"
-  bundle exec standardrb
-  echo "======= complete"
-}
-
-function fix {
-  standardrb --fix --only $1
-  git add -A
-  git commit -m "fix $1"
-  standardrb | tail
-}
-
-export AWS_PROFILE=engineering
-
-# AWS SSO aliases
-alias aws_login="aws sso login --profile default"
-alias aws_ls="aws configure list-profiles"
-alias awsv="aws-vault exec engineering --"
-
-function aws_pwd {
-  echo "Current profile: ${AWS_PROFILE}"
-}
-
-function aws_profile {
-  NEWPROFILE=$1
-  echo "Profile was previously: ${AWS_PROFILE}"
-  export AWS_PROFILE=${NEWPROFILE}
-  echo "Changed profile to ${AWS_PROFILE}"
-}
-
-function ecs_console {
-  bundle exec ut_ecs $1 console -- -- --noautocomplete
-}
-alias ecc=ecs_console

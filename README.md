@@ -19,7 +19,7 @@
   - `touch $HOME/.zsh/env_local`
   - `ln -s $DOTF/git/config $HOME/.gitconfig`
   - `ln -s $DOTF/bin $HOME/bin` # (might need to remove the target first)
-  - `ln -s $DOTF/kitty $HOME/.config/kitty`
+  - `ln -s $DOTF/nvim $HOME/.config/nvim`
 
 ## List of Files
 * RectangleConfig.json - configuration export from the Rectangle window manager

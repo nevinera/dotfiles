@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "date"
+title = ARGV.shift || nil
+suffix = ARGV.pop || nil
+tags = ARGV
+timestamp = Time.now.strftime("%Y%m%dT%H%M%S")
+
+if title.nil?
+  warn "Usage: namefor TITLE [TAGS [MAYBE [MANY]]] [SUFFIX]"
+  exit 1
+end
+
+prefix = [title, tags, timestamp].compact.join("--")
+puts [prefix, suffix].compact.join(".")

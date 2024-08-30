@@ -1,6 +1,11 @@
 set nocompatible
 filetype on
 
+au BufNewFile,BufRead *.json.jbuilder set ft=ruby
+au BufNewFile,BufRead *.erb.deface set ft=eruby
+autocmd FileType ruby autocmd BufWritePre <buffer> %s/\s\+$//e
+
+
 colorscheme ir_black
 
 set nowrap
@@ -21,6 +26,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
+Plug 'slim-template/vim-slim'
 Plug 'dense-analysis/ale'
 Plug 'wellle/context.vim'
 call plug#end()

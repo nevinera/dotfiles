@@ -23,9 +23,20 @@ alias gc='git commit -m'
 alias gdc='git diff --cached'
 alias diss='diff --side-by-side --suppress-common-lines'
 
+function fixit {
+  git sr "joinery_goalie_tools_$1_path" "$1_joinery_goalie_tools_path"
+  git ar
+  git fixup $1
+}
+
 alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
 alias buc='bundle update --conservative'
+
+alias qqr='qq -Xrspec -v'
+alias qqs='qq -Xstandardrb -v'
+alias qql='qq -Xrubocop -v'
+alias qqm='qq -Xmarkdown_lint -v'
 
 alias redis_clear='redis-cli flushall'
 alias cleardns='sudo discoveryutil udnsflushcaches'
@@ -33,13 +44,84 @@ alias dh="du -h -d 1"
 alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias cols='column -t -s,'
 
+alias rgi="rg -i"
+alias rgr="rg -trb"
+
+# k8s
+# f22r init
+# kubectul config use-context edit@working-1
+# kubectl get all
+alias k="kubectl"
+alias kp='kubectl --context=edit@production-1'
+alias ks='kubectl --context=edit@working-1'
+alias kp_worker_logs='kp logs -f -l app=production-frontend-frontend-worker --max-log-requests 40'
+alias ks_web_logs='kubectl logs --context=edit@working-1 -f -l app=staging-frontend-frontend-web --max-log-requests 40'
+
+function kube_logs {
+  k logs -f -l app=$1 --max-log-requests $2
+}
+alias ks_worker_logs='kube_logs staging-frontend-frontend-worker 400'
+
 ############## Navigation stuff
 alias cds="cd $HOME/src"
 alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
+alias cdc="cd $HOME/src/rspec-cover_it"
+alias cdj="cd $HOME/src/glaze-joinery"
+
+alias cdrb="cd $HOME/src/rb"
+alias cdrf="cd $HOME/src/rb/fileutils"
+alias cdb="cd $HOME/src/rubygems/bundler"
+alias cdn="cd $HOME/src/null_statsd"
+
+alias cdrx="cd $HOME/src/rspec-expectations"
+alias cdrs="cd $HOME/src/rspec-support"
+alias cdrc="cd $HOME/src/rspec-core"
+alias cdrm="cd $HOME/src/rspec-mocks"
 
 alias s3="aws s3"
+
+## remote consoles
+alias staging_console="f22r bash staging-frontend"
+alias production_console="f22r bash production-frontend"
+alias uat_console="f22r bash uat-frontend"
+alias scon=staging_console
+alias pcon=production_console
+alias ucon=uat_console
+
+function cleanup_pod {
+  f22r bash $1 --delete-pod=true
+}
+
+alias staging_pod_cleanup="cleanup_pod staging-frontend"
+alias production_pod_cleanup="cleanup_pod production-frontend"
+alias uat_pod_cleanup="cleanup_pod uat-frontend"
+alias justin_pod_cleanup="bundle exec f22r bash production-frontend --shell-cmd="/bin/sh -c 'tmux attach-session -d -t my-session|| tmux'" --delete-pod=true"
+
+function check_domains {
+  kubectl --context=admin@production-eks get order -l release=production-frontend --sort-by='{.metadata.creationTimestamp}' -o json | \
+    jq '.items[] | [.metadata.name, .metadata.creationTimestamp, ([.status.authorizations[].identifier] | sort | join(","))] '
+}
+
+## sops helpers
+function sops_edit {
+  sops deploy/$1/frontend-env.secret.sops.yml
+}
+
+function sops_resolve {
+  sops --ignore-mac deploy/$1/frontend-env.secret.sops.yml
+}
+
+alias sops_production="sops_edit production"
+alias sops_staging="sops_edit staging"
+alias sops_uat="sops_edit uat"
+alias sops_default="sops_edit _default"
+
+alias sopsx_production="sops_resolve production"
+alias sopsx_staging="sops_resolve staging"
+alias sopsx_uat="sops_resolve uat"
+alias sopsx_default="sops_resolve _default"
 
 function s3cat {
   aws s3 cp $1 -
@@ -48,3 +130,16 @@ function s3cat {
 function s3tags {
   aws s3api get-object-tagging --bucket $1 --key $2
 }
+
+function prs_since {
+  git lo --since $1 | grep "Merge pull request #" | cut -c 23-35 | sort | uniq -c | sort -n
+}
+
+function commits_since {
+  git shortlog --summary --numbered --all --no-merges --since $1
+}
+
+# server startups
+alias start_hybrid="bin/service start-hybrid"
+alias start_webpack="bin/webpack-dev-server"
+alias start_rails="rails s webrick"

@@ -44,6 +44,18 @@ alias cds="cd $HOME/src"
 alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
+alias cdc="cd $HOME/src/rspec-cover_it"
+alias cdj="cd $HOME/src/glaze-joinery"
+
+alias cdrb="cd $HOME/src/rb"
+alias cdrf="cd $HOME/src/rb/fileutils"
+alias cdb="cd $HOME/src/rubygems/bundler"
+alias cdn="cd $HOME/src/null_statsd"
+
+alias cdrx="cd $HOME/src/rspec-expectations"
+alias cdrs="cd $HOME/src/rspec-support"
+alias cdrc="cd $HOME/src/rspec-core"
+alias cdrm="cd $HOME/src/rspec-mocks"
 
 alias s3="aws s3"
 

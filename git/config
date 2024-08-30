@@ -31,6 +31,7 @@
 [alias]
   ar = add -A
   amend = commit --amend
+  lo  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short
   l   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 5
   ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30
   lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 500

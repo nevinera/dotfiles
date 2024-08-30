@@ -27,11 +27,17 @@ alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
 alias buc='bundle update --conservative'
 
+alias qqr='qq -Xrspec -v'
+alias qqs='qq -Xstandardrb -v'
+alias qql='qq -Xrubocop -v'
+alias qqm='qq -Xmarkdown_lint -v'
+
 alias redis_clear='redis-cli flushall'
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
 alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias cols='column -t -s,'
+
 
 ############## Navigation stuff
 alias cds="cd $HOME/src"

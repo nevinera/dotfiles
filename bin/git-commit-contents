@@ -2,4 +2,4 @@
 
 HASH=${1:-HEAD}
 FINAL=${2:-$HASH}
-git diff -w -M60 --color --word-diff=color $HASH^..$FINAL
+git diff -w -M60 --color --word-diff=color "$HASH~1..$FINAL"

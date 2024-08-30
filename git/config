@@ -35,8 +35,8 @@
   l   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 5
   ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30
   lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 500
-  lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30 --author=mueller
-  cm = commit -m
+  lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30 --author=nevinera
+  cm = commit
   cs = commit-summary
   cc = commit-contents
   b = branch

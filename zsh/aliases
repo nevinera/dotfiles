@@ -45,7 +45,6 @@ alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
 alias cdc="cd $HOME/src/rspec-cover_it"
-alias cdj="cd $HOME/src/glaze-joinery"
 
 alias cdrb="cd $HOME/src/rb"
 alias cdrf="cd $HOME/src/rb/fileutils"

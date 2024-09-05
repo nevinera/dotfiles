@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
-alias vi=nvim
-alias vim=nvim
+alias vi=vim
 alias ba='vim ~/.zsh/aliases; source ~/.zsh/aliases'
 alias bar='source ~/.zsh/aliases'
 alias vimrc='vim ~/.config/nvim/init.vim'
@@ -42,26 +41,4 @@ alias cols='column -t -s,'
 ############## Navigation stuff
 alias cds="cd $HOME/src"
 alias cdd="cd $HOME/src/dotfiles"
-alias cde="cd $HOME/src/environment_helpers"
-alias cdq="cd $HOME/src/quiet_quality"
-alias cdc="cd $HOME/src/rspec-cover_it"
-
-alias cdrb="cd $HOME/src/rb"
-alias cdrf="cd $HOME/src/rb/fileutils"
-alias cdb="cd $HOME/src/rubygems/bundler"
-alias cdn="cd $HOME/src/null_statsd"
-
-alias cdrx="cd $HOME/src/rspec-expectations"
-alias cdrs="cd $HOME/src/rspec-support"
-alias cdrc="cd $HOME/src/rspec-core"
-alias cdrm="cd $HOME/src/rspec-mocks"
-
-alias s3="aws s3"
-
-function s3cat {
-  aws s3 cp $1 -
-}
-
-function s3tags {
-  aws s3api get-object-tagging --bucket $1 --key $2
-}
+alias cdm="cd $HOME/co/manage"

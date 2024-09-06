@@ -66,3 +66,10 @@ function s3cat {
 function s3tags {
   aws s3api get-object-tagging --bucket $1 --key $2
 }
+
+
+export DEV_MACHINE=dev203
+export DEV_NAME=nevinera
+export FIRM_MACHINE=sdg990.meraki.com
+alias ssd="ssh $DEV_NAME@$DEV_MACHINE"
+alias ssf="echo 'CHECK DUO ON YOUR PHONE' && ssh -A $DEV_NAME@$FIRM_MACHINE"

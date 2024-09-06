@@ -41,6 +41,7 @@ alias cols='column -t -s,'
 
 ############## Navigation stuff
 alias cds="cd $HOME/src"
+alias cdn="cd $HOME/notes"
 alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
@@ -49,7 +50,7 @@ alias cdc="cd $HOME/src/rspec-cover_it"
 alias cdrb="cd $HOME/src/rb"
 alias cdrf="cd $HOME/src/rb/fileutils"
 alias cdb="cd $HOME/src/rubygems/bundler"
-alias cdn="cd $HOME/src/null_statsd"
+alias cdns="cd $HOME/src/null_statsd"
 
 alias cdrx="cd $HOME/src/rspec-expectations"
 alias cdrs="cd $HOME/src/rspec-support"

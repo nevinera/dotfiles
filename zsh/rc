@@ -19,3 +19,9 @@ export EDITOR=nvim
 setopt inc_append_history
 # Reloads the history whenever you use it
 setopt share_history
+
+# Setup for mise en place
+eval "$(/Users/albrights/.local/bin/mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"

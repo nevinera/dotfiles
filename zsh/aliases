@@ -57,6 +57,8 @@ alias cdrs="cd $HOME/src/rspec-support"
 alias cdrc="cd $HOME/src/rspec-core"
 alias cdrm="cd $HOME/src/rspec-mocks"
 
+alias cdrx="cd $HOME/src/rspec-expectations"
+
 alias s3="aws s3"
 
 function s3cat {

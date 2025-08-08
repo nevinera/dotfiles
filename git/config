@@ -1,9 +1,10 @@
 [user]
-  name = Eric Mueller
-  email = nevinera@meraki.com
+	name = Eric Mueller
+	email = nevinera@meraki.com
 
 [core]
   pager = cat
+  editor = nvim
   excludesfile = ~/.gitignore
 
 [color]
@@ -36,6 +37,7 @@
   ll  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30
   lll = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 500
   lm  = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" --date=short -n 30 --author=nevinera
+  lt   = log --pretty=tformat:"%h%x09%Cblue%ad%x20%C(yellow)%<(12,trunc)%an%x09%Creset%s" -n 5
   cm = commit
   cs = commit-summary
   cc = commit-contents
@@ -55,6 +57,8 @@
   recent = "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
   pickaxe = "log -p -S"
   fix = fixup
+  ignore-changes = update-index --assume-unchanged
+  wip = commit --no-verify --message WIP
 
 [push]
   default = tracking

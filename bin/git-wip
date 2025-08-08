@@ -1,4 +1,13 @@
-#!/usr/bin/env sh
+#!/usr/bin/env ruby
 
-git add -A
-git commit -m "WIP: $*"
+wip_all = ARGV.delete("--all") || ARGV.delete("-a")
+
+message =
+  if ARGV.any?
+    "WIP: " + ARGV.join(" ")
+  else
+    "WIP"
+  end
+
+system("git", "add", "-A") if wip_all
+exec("git", "commit", "--no-verify", "-m", message)

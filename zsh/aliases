@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
-alias vi=vim
+alias vi=nvim
+alias vim=nvim
 alias ba='vim ~/.zsh/aliases; source ~/.zsh/aliases'
+alias zenv="vim ~/.zsh/env_local; source ~/.zsh/env_local"
 alias bar='source ~/.zsh/aliases'
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias md5=md5sum
@@ -14,13 +16,30 @@ alias l='ls -FG'
 
 alias rmr='rm -r'
 
+alias gr="rg -t ruby"
+alias rgn="rg --files-without-match"
+alias rgl="rg -l"
+
+rgj () {
+  rg -l $1 extra/jenkins/
+}
+
 alias gitroot='git rev-parse --show-toplevel'
-alias cdr='cd `gitroot`'
+alias cdroot='cd `gitroot`'
 alias stat='git status'
+alias lsf='git ls-files'
 alias gd='git diff -w'
 alias gc='git commit -m'
 alias gdc='git diff --cached'
 alias diss='diff --side-by-side --suppress-common-lines'
+
+is_ancestor () {
+  git merge-base --is-ancestor $1 $2 && echo "$1 is an ancestor of $2" || echo "$1 is not an ancestor of $2"
+}
+
+lsg () {
+  git ls-files | grep $1
+}
 
 alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
@@ -31,6 +50,17 @@ alias qqs='qq -Xstandardrb -v'
 alias qql='qq -Xrubocop -v'
 alias qqm='qq -Xmarkdown_lint -v'
 
+lint_staged () {
+  git diff --name-only --cached | grep "\.rb$" | xargs -t -d '\n' -n 1000 script/ruby33 bundle exec rubocop --cache=false
+}
+
+lint_changed () {
+  git diff --diff-filter=d --name-only HEAD | grep "\.rb$" | xargs -t -d '\n' -n 1000 script/ruby33 bundle exec rubocop --cache=false
+}
+
+alias lint=lint_staged
+alias lc=lint_changed
+
 alias redis_clear='redis-cli flushall'
 alias cleardns='sudo discoveryutil udnsflushcaches'
 alias dh="du -h -d 1"
@@ -38,7 +68,72 @@ alias shuffle="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias cols='column -t -s,'
 
 
+## Function
+alias tmux_iterm="tmux -CC"
+alias tma="tmux -CC attach"
+alias push_current="git push origin HEAD:refs/for/master"
+alias pc="push_current"
+
+fixssh () {
+	eval `tmux show-env | sed -n 's/^\(SSH_[^=]*\)=\(.*\)/export \1="\2"/p'`
+}
+
+## mki
+alias mbs="mki build status"
+alias mgv="mki gerrit verify"
+alias mgs="mki gerrit status"
+alias cfg="$HOME/bin/checkout_gerrit_cr"
+
+fbr () {
+	local branch
+	branch=$(git branch --sort=committerdate | tail -30 | fzf +s +m --tac -e)  && git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
+}
+
+source $HOME/co/manage/script/svnmerge_helpers.sh
+
+alias ls_unsynced="git ls-remote origin 'refs/subgit/unsynced/*'"
+alias fetch_unsynced="git fetch origin master 'refs/subgit/unsynced/*:refs/remotes/origin/unsynced/*'"
+
+svnr () {
+  local orig=`pwd`
+  cd ${HOME}/co/manage-released
+  svnprep
+  script/svn_avail_fast.rb
+  echo "Which revision? "
+  read revision
+  echo "Creating merge patch - cherry-picking changeset..."
+  svnm -r ${revision}
+  echo "Release? y/n"
+  read confirm
+  if [[ "$confirm" == "y" || "$confirm" == "" ]]
+  then
+    echo "Committing release ${revision}..."
+    svn commit -F svnmerge-commit-message.txt
+  fi
+  cd $orig
+}
+
 ############## Navigation stuff
 alias cds="cd $HOME/src"
-alias cdd="cd $HOME/src/dotfiles"
+alias cddot="cd $HOME/src/dotfiles"
 alias cdm="cd $HOME/co/manage"
+alias cdmr="cd $HOME/co/manage-released"
+alias cdc="cd $HOME/co/create-devel-spike-branch"
+alias cdmrel="cd /var/local/meraki/manage-released"
+alias cdmdev="cd /var/local/meraki/manage-devel"
+
+### rails/rspec
+
+alias start_server="script/server"
+alias start_console="script/console"
+alias start_spring="RAILS_HELPER_DB_CACHE=true script/spring server --background"
+alias test="script/spring rspec"
+
+alias dspec="CODE_COVERAGE_ENABLED=false debe rspec"
+alias dcov="CODE_COVERAGE_ENABLED=true debe rspec"
+alias rcov="COVERAGE=true bundle exec rspec"
+
+### live_broker
+alias run_everything_but_lb="script/server --except broker"
+alias run_lb_now="script/ruby33 bundle exec script/live_broker/run 1"
+alias heart_monitor="script/ruby33 bundle exec script/live_broker/live_broker_heart_monitor.rb --cometd-prefix=$COMETD_PREFIX"

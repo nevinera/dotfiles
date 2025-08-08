@@ -27,7 +27,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'slim-template/vim-slim'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'wellle/context.vim'
 call plug#end()
 
@@ -85,18 +85,21 @@ vnoremap > >gv
 
 " -------- linting --------
 
-let g:ruby_path = system('rvm current')
-let g:ale_linters = {'ruby': ['standardrb']}
-let g:ale_fixers = {'ruby': ['standardrb']}
-let g:ale_lint_on_save = 1
-let g:ale_sign_error = '●●'
-let g:ale_sign_warning = '--'
+" let g:ruby_path = system('rvm current')
+" let g:ale_linters = {'ruby': ['standardrb']}
+" let g:ale_fixers = {'ruby': ['standardrb']}
+" let g:ale_lint_on_insert_leave = 0
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_lint_on_save = 1
+" let g:ale_lint_on_enter = 1
+" let g:ale_sign_error = '●●'
+" let g:ale_sign_warning = '--'
 highlight clear SignColumn
 set signcolumn=number
 
-map <leader>f :ALEFix<cr>
-highlight ALEWarning gui=undercurl cterm=undercurl
-highlight ALEError gui=undercurl cterm=undercurl
+" map <leader>f :ALEFix<cr>
+" highlight ALEWarning gui=undercurl cterm=undercurl
+" highlight ALEError gui=undercurl cterm=undercurl
 
 " -------- folding --------
 

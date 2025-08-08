@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+class String
+  def red;    "\e[31m#{self}\e[0m"; end
+  def green;  "\e[32m#{self}\e[0m"; end
+  def yellow; "\e[33m#{self}\e[0m"; end
+end
+
+def usage
+  warn "Usage:".yellow
+  warn ""
+  warn "checkout_gerrit_cr CR_NUM [BRANCHNAME]".yellow
+  warn "checkout_gerrit_cr CR_NUM/PATCHSET [BRANCHNAME]".yellow
+  warn "checkout_gerrit_cr CR_URL [BRANCHNAME]".yellow
+  warn ""
+  exit 1
+end
+
+def latest_patchset(crnum)
+  warn "Determining patchset...".green
+  crnum_suffix = crnum[-2..-1]
+  lines = `git ls-remote origin '#{crnum_suffix}/#{crnum}/*'`.split("\n")
+  all_refs = lines.map { |line| line.strip.split("\t").last }
+  ref = all_refs.grep(%r{^refs/changes/\d+/\d+/\d+$}).sort.last
+  patchset = ref.split("/").last
+end
+
+identifier = ARGV.shift || usage
+if identifier.start_with?("http")
+  identifier =~ %r{gerrit\.ikarem\.io/c/manage/\+/(\d+)(/(\d+))?}
+  @cr_number = $1
+  @patchset = $3 || latest_patchset(@cr_number)
+elsif identifier.include?("/")
+  @cr_number = identifier.split("/").first
+  @patchset = identifier.split("/").last
+else
+  @cr_number = identifier
+  @patchset = latest_patchset(@cr_number)
+end
+
+@branch_name = ARGV.shift || "branch-#{@cr_number}-#{@patchset}"
+
+warn "Fetching #{@cr_number}/#{@patchset} into branch #{@branch_name}...".green
+
+url = "ssh://nevinera@gerrit.ikarem.io:29418/manage"
+cr_prefix = @cr_number[-2..-1]
+ref = "refs/changes/#{cr_prefix}/#{@cr_number}/#{@patchset}"
+
+warn "    git fetch '#{url}' '#{ref}'"
+
+fetched = system("git", "fetch", url, ref)
+if fetched
+  warn "Fetched ref #{ref} from gerrit".green
+else
+  warn "Failed to fetch ref #{ref} from gerrit".red
+  exit 2
+end
+
+warn "    git checkout -b '#{@branch_name}' FETCH_HEAD"
+
+checked_out = system("git", "checkout", "-b", @branch_name, "FETCH_HEAD")
+if checked_out
+  warn "Successfully checked out #{ref} as #{@branch_name}".green
+else
+  warn "Failed to check the fetched ref into #{@branch_name}".red
+  exit 3
+end

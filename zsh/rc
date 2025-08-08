@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/neovim/bin:$HOME/bin:$PATH"
 
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
@@ -8,7 +8,22 @@ source $HOME/.zsh/aliases
 
 export EDITOR=vim
 
+CODE_COVERAGE_ENABLED=false
+
 # Appends every command to the history file once it is executed
-setopt inc_append_history
+# setopt inc_append_history
 # Reloads the history whenever you use it
-setopt share_history
+# setopt share_history
+
+# keep a lot more history!
+HISTFILE=~/.zsh_history
+HISTSIZE=99999999
+SAVEHIST=$HISTSIZE
+
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%b'
+
+setopt PROMPT_SUBST
+NEWLINE=$'\n'
+PROMPT='%F{blue}%~%f (%F{red}${vcs_info_msg_0_}%f)${NEWLINE}$ '

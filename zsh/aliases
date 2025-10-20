@@ -16,6 +16,7 @@ alias l='ls -FG'
 
 alias rmr='rm -r'
 
+alias g="git"
 alias mx="mise x --"
 alias gitroot='git rev-parse --show-toplevel'
 alias cdr='cd `gitroot`'

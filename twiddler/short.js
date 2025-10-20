@@ -1,0 +1,176 @@
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function tunerRow(n) {
+  const row = document.querySelector(`tr.tunertablerow.ui-datatable-selectable[data-ri='${n}']`);
+  return row;
+}
+
+async function deleteRow(n) {
+  const row = tunerRow(n);
+  if (!row) {
+    console.log("Could not find row", n);
+    return;
+  }
+
+  const deleteButton = row.querySelector("button.tuner-button[title='Delete']");
+  if (deleteButton) {
+    console.log("deleting row", n);
+    deleteButton.click();
+
+    await delay(400);
+
+    const confirmModal = document.querySelector("div.ui-confirm-dialog");
+    const confirmButton = confirmModal.querySelector("button.ui-confirmdialog-yes");
+    confirmButton.click();
+    await delay(400);
+  } else {
+    console.log("no delete button found in row", n);
+  }
+}
+
+async function deleteAll() {
+  const rowCount = document.querySelectorAll("tr.tunertablerow.ui-datatable-selectable").length;
+  for (var i = rowCount - 1; i >= 0; i--) {
+    await deleteRow(i);
+  }
+}
+
+async function createEmptyChord() {
+  const addChordButton = document.querySelector("div[id='tableForm:toolbarsticky'] button[id='tableForm:addRowButton2']");
+  addChordButton.click();
+  await delay(2000);
+}
+
+async function editChord(n) {
+  const row = tunerRow(n);
+  if (!row) {
+    console.log("Could not edit row, not found", n);
+    return;
+  }
+
+  const editButton = row.querySelector("button.tuner-button[title='Edit']");
+  if (!editButton) {
+    console.log("No edit button for row", n);
+    return;
+  }
+
+  editButton.click();
+  await delay(800);
+}
+
+async function activateButton(name) {
+  let activated = 0;
+  document.querySelectorAll("div.twiddlerbuttonoff").forEach(async function(elem) {
+    if (elem.innerText == name) {
+      console.log("button was off; turning it on", elem.innerText);
+      elem.click();
+      activated ++;
+      await delay(500);
+    }
+  });
+  if (activated == 0) {
+    console.log("No buttons were activated for", name);
+  }
+}
+
+async function setButtons(buttonList) {
+  buttonList.forEach(async function(name) {
+    if (name) {
+      activateButton(name);
+    }
+  });
+}
+
+async function setKeyboardAction(text) {
+  const actionListEditor = document.querySelector("div[id='tableForm:actionlisteditor']");
+  if (!actionListEditor) {
+    console.log("Could not find the action list editor to set the action");
+    return false;
+  }
+
+  const addButton = actionListEditor.querySelector("button[id='tableForm:actionlisteditor:addActionButton']");
+  if (!addButton) {
+    console.log("could not find the '+ add' button in the action-list-editor");
+    return false;
+  }
+
+  addButton.click();
+  await delay(100);
+
+  const menuList = document.querySelector("div[id='tableForm:actionlisteditor:addactiontieredmenusingle'] ul[role='menubar']")
+  if (!menuList) {
+    console.log("no menu list found while adding an action");
+    return false;
+  }
+
+  const keyboardMenuEntry = menuList.childNodes[0];
+  const keyboardLink = keyboardMenuEntry.querySelector("li a");
+  keyboardLink.click();
+  await delay(500);
+
+  // it doesn't autoclose when we click it this way, we have to manually close it.
+  addButton.click();
+  await delay(500);
+
+  const textBox = document.querySelector("div[id='tableForm:actionlisteditor'] textarea");
+  if (!textBox) {
+    console.log("Could not find text box to put action in");
+    return false;
+  }
+
+  textBox.value = text;
+  await delay(500);
+
+  return true;
+}
+
+async function applyEdit() {
+  const button = document.querySelector("button[id='tableForm:applybutton']");
+  if (!button) {
+    console.log("Could not find apply button");
+    return;
+  }
+  button.click();
+  await delay(3000);
+}
+
+async function createChord(buttons, action) {
+  await createEmptyChord();
+  await editChord(0);
+  await setButtons(buttons);
+  await setKeyboardAction(action);
+  await applyEdit();
+}
+
+function chordToButtons(chord) {
+  const chars = chord.split("");
+  const labels = ["T", "0", "1", "2", "3", "4"];
+  const buttons = chars.map(function(ch, index) {
+    if (ch == "-") {
+      return null;
+    } else {
+      return labels[index] + ch;
+    }
+  });
+  return buttons;
+}
+
+async function createChords(mapping) {
+  for (const chord in mapping) {
+    const action = mapping[chord];
+    console.log(`Creating the ${action} chord (${chord})`);
+    const buttons = chordToButtons(chord);
+    await createChord(buttons, action);
+  }
+}
+
+const mapping = {
+  // No modifier keys - alphabet + Escape
+  "---R--": "i", "---M--": "e", "---L--": "o",
+  // "----R-": "n", "----M-": "t", "----L-": "r",
+  // "-----R": "a", "-----M": "h", "-----L": "s",
+};
+
+// createChords(mapping);

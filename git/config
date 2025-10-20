@@ -4,11 +4,11 @@
 
 [core]
   pager = cat
-  excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 
 [color]
   branch = auto
-  diff = auto
+  diff = always
   status = auto
 [color "branch"]
   current = yellow reverse
@@ -55,6 +55,7 @@
   recent = "for-each-ref --count=10 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
   pickaxe = "log -p -S"
   fix = fixup
+  ignore-changes = update-index --assume-unchanged
 
 [push]
   default = tracking

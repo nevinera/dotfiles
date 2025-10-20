@@ -3,6 +3,7 @@ alias vi=nvim
 alias vim=nvim
 alias ba='vim ~/.zsh/aliases; source ~/.zsh/aliases'
 alias bar='source ~/.zsh/aliases'
+alias zenv='vim ~/.zsh/env_local; source ~/.zsh/env_local'
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias md5=md5sum
 
@@ -15,6 +16,7 @@ alias l='ls -FG'
 
 alias rmr='rm -r'
 
+alias mx="mise x --"
 alias gitroot='git rev-parse --show-toplevel'
 alias cdr='cd `gitroot`'
 alias stat='git status'
@@ -27,10 +29,10 @@ alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
 alias buc='bundle update --conservative'
 
-alias qqr='qq -Xrspec -v'
-alias qqs='qq -Xstandardrb -v'
-alias qql='qq -Xrubocop -v'
-alias qqm='qq -Xmarkdown_lint -v'
+alias qqr='be qq -Xrspec -v'
+alias qqs='be qq -Xstandardrb -v'
+alias qql='be qq -Xrubocop -v'
+alias qqm='be qq -Xmarkdown_lint -v'
 
 alias redis_clear='redis-cli flushall'
 alias cleardns='sudo discoveryutil udnsflushcaches'
@@ -46,6 +48,9 @@ alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
 alias cdc="cd $HOME/src/rspec-cover_it"
+
+alias cdf="cd $HOME/src/flaky-test-dashboard"
+alias cdo="cd $HOME/src/meraki-code-ownership"
 
 alias cdrb="cd $HOME/src/rb"
 alias cdrf="cd $HOME/src/rb/fileutils"
@@ -68,8 +73,38 @@ function s3tags {
 }
 
 
-export DEV_MACHINE=dev203
+export DEV_MACHINE=dev255
 export DEV_NAME=nevinera
 export FIRM_MACHINE=sdg990.meraki.com
 alias ssd="ssh $DEV_NAME@$DEV_MACHINE"
+alias ssdorig="ssh $DEV_NAME@dev203"
 alias ssf="echo 'CHECK DUO ON YOUR PHONE' && ssh -A $DEV_NAME@$FIRM_MACHINE"
+
+export FLAKES_DB_URL="postgresql://flakes:${PROD_US_WEST_2_FLAKY_TEST_RDS_POSTGRES_PASSWORD}@localhost:63333/sre_developer_tools_rds_prod"
+
+function test_reports_local {
+  DATABASE_URL=$FLAKES_DB_URL exe/notify --debug --verbose --weekly --reports-only --override-channel CCBCEQK3J --dry-run
+}
+
+function test_reports_slack {
+  DATABASE_URL=$FLAKES_DB_URL exe/notify --debug --verbose --weekly --reports-only --override-channel CCBCEQK3J
+}
+
+alias tunnel_pg="echo 'CHECK DUO ON YOUR PHONE' && ssh -NL 63333:sre-developer-tools-rds-prod.crdnrt6nivcb.us-west-2.rds.amazonaws.com:5432 sdg0"
+function flaky_console {
+  DATABASE_URL=$FLAKES_DB_URL bin/rails c
+}
+function flaky_dbconsole {
+  DATABASE_URL=$FLAKES_DB_URL bin/rails dbconsole
+}
+function flaky_migrate {
+  DATABASE_URL=$FLAKES_DB_URL rake db:migrate
+}
+
+function flaky_reset_tests {
+  DATABASE_URL=$FLAKES_DB_URL bundle exec exe/reset-observation-age "$@"
+}
+
+function autoskips_dbconsole {
+  DATABASE_URL="postgresql://autoskips:epUGDdLDuHf4XDwJOhu4LBWPl8FuHA@localhost:63333/sre_developer_tools_rds_prod" bin/rails dbconsole
+}

@@ -33,10 +33,11 @@ alias be='bundle exec'
 alias br='bundle install && bundle clean --force'
 alias buc='bundle update --conservative'
 
-alias qqr='qq -Xrspec -v'
-alias qqs='qq -Xstandardrb -v'
-alias qql='qq -Xrubocop -v'
-alias qqm='qq -Xmarkdown_lint -v'
+alias qq="bundle exec qq"
+alias qqr='bundle exec qq -Xrspec -v'
+alias qqs='bundle exec qq -Xstandardrb -v'
+alias qql='bundle exec qq -Xrubocop -v'
+alias qqm='bundle exec qq -Xmarkdown_lint -v'
 
 alias redis_clear='redis-cli flushall'
 alias cleardns='sudo discoveryutil udnsflushcaches'
@@ -46,6 +47,8 @@ alias cols='column -t -s,'
 
 alias rgi="rg -i"
 alias rgr="rg -trb"
+
+alias g="git"
 
 # k8s
 # f22r init
@@ -68,7 +71,8 @@ alias cdd="cd $HOME/src/dotfiles"
 alias cde="cd $HOME/src/environment_helpers"
 alias cdq="cd $HOME/src/quiet_quality"
 alias cdc="cd $HOME/src/rspec-cover_it"
-alias cdj="cd $HOME/src/glaze-joinery"
+alias cdj="cd $HOME/src/framebridge/glaze-joinery"
+alias cdst="cd $HOME/src/framebridge/sandalwood"
 
 alias cdrb="cd $HOME/src/rb"
 alias cdrf="cd $HOME/src/rb/fileutils"
@@ -142,4 +146,4 @@ function commits_since {
 # server startups
 alias start_hybrid="bin/service start-hybrid"
 alias start_webpack="bin/webpack-dev-server"
-alias start_rails="rails s webrick"
+alias start_rails="rails s"

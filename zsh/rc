@@ -3,9 +3,6 @@ export PATH="$HOME/bin:$PATH"
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 fpath+=($HOME/.zsh/pure)
 
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
-
 source ~/.zsh/env_local
 source $HOME/.zsh/aliases
 
@@ -19,3 +16,20 @@ export EDITOR=nvim
 setopt inc_append_history
 # Reloads the history whenever you use it
 setopt share_history
+
+SANDALWOOD_HOME=$HOME/src/framebridge/sandalwood
+if [ -d $SANDALWOOD_HOME/bin ] ; then
+  PATH="$SANDALWOOD_HOME/bin:${PATH}"
+  export PATH
+fi
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Add docker commands to path
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"

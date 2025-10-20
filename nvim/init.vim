@@ -1,5 +1,6 @@
 set nocompatible
-filetype on
+syntax on
+filetype plugin indent on
 
 colorscheme ir_black
 
@@ -23,6 +24,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'dense-analysis/ale'
 Plug 'wellle/context.vim'
+Plug 'slim-template/vim-slim'
 call plug#end()
 
 
@@ -51,6 +53,10 @@ inoremap <c-h> <esc><c-w>h
 inoremap <c-l> <esc><c-w>l
 map <leader>j :split<cr><c-j>
 map <leader>l :vsplit<cr><c-l>
+nnoremap <c-s-j> :split<cr><c-j>
+inoremap <c-s-j> <esc>:split<cr><c-j>i
+nnoremap <c-s-l> :vsplit<cr><c-l>
+inoremap <c-s-l> <esc>:vplit<cr><c-l>i
 
 " file navigation
 let g:fzf_mru_relative = 1 
@@ -91,6 +97,22 @@ set signcolumn=number
 map <leader>f :ALEFix<cr>
 highlight ALEWarning gui=undercurl cterm=undercurl
 highlight ALEError gui=undercurl cterm=undercurl
+
+" -------- whitespace -----
+
+function! <SID>StripTrailingWhitespaces()
+  if !&binary && &filetype != 'diff'
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endif
+endfun
+highlight TrailingWhitespace ctermbg=red guibg=red
+
+autocmd FileType ruby,rake,slim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType ruby,rake,slim match TrailingWhitespace /\s\+$/
+
+
 
 " -------- folding --------
 

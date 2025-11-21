@@ -19,7 +19,13 @@ end
 def latest_patchset(crnum)
   warn "Determining patchset...".green
   crnum_suffix = crnum[-2..-1]
-  lines = `git ls-remote origin '#{crnum_suffix}/#{crnum}/*'`.split("\n")
+  refs_text = `git ls-remote origin '#{crnum_suffix}/#{crnum}/*'`
+  unless $?.success?
+    warn "Could not `git ls-remote origin` - is your ssh valid?".red
+    exit(4)
+  end
+
+  lines = refs_text.split("\n")
   all_refs = lines.map { |line| line.strip.split("\t").last }
   ref = all_refs.grep(%r{^refs/changes/\d+/\d+/\d+$}).sort.last
   patchset = ref.split("/").last

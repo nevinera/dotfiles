@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rg "class $1" script/live_broker/handlers/
+
+echo "logs for all of those files:"
+
+rg -l "class $1" script/live_broker/handlers/ | xargs git ll

@@ -5,11 +5,13 @@ require "optparse"
 
 options = {
   input: "coverage/coverage.json",
+  all: false,
 }
 
 OptionParser.new do |opts|
   opts.banner = "Usage: covr [options] PATH [PATH ...]"
   opts.on("-i", "--input FILE", "Input JSON coverage file") { |path| options[:input] = path }
+  opts.on("-a", "--all", "Show files with no missing coverage") { options[:all] = true }
 end.parse!
 
 paths = ARGV.dup
@@ -24,22 +26,46 @@ text = File.read(options[:input])
 data = JSON.parse(text)
 coverage = data["coverage"] || raise("No coverage data found")
 
+def line_coverage_from(file_coverage)
+  line_coverage = file_coverage["lines"]
+  total_lines = line_coverage.compact.size
+  covered_lines = line_coverage.count { |hits| hits && hits > 0 }
+  line_ratio = total_lines.zero? ? 1.0 : covered_lines.to_f / total_lines
+  missing_lines = line_coverage
+    .each_with_index
+    .select { |hits, _| hits && hits == 0 }
+    .map { |_, line_index| line_index + 1 }
+  [covered_lines, total_lines, line_ratio, missing_lines]
+end
+
+def branch_coverage_from(file_coverage)
+  return [0, 0, 1.0] unless file_coverage.key?("branches")
+
+  branch_coverage = file_coverage["branches"]
+  total_branches = branch_coverage.size
+  covered_branches = branch_coverage.count { |br| br["coverage"] && br["coverage"] > 0 }
+  missing_branches = branch_coverage.select { |br| br["coverage"] == 0 }
+  branch_ratio = total_branches.zero? ? 1.0 : covered_branches.to_f / total_branches
+  [covered_branches, total_branches, branch_ratio, missing_branches]
+end
+
 coverage.each_pair do |file_path, file_coverage|
-  matcher = paths.detect { |path| file_path.end_with?(path) || file_path.include?(path) }
-  next unless matcher
+  if paths.any?
+    matcher = paths.detect { |path| file_path.end_with?(path) || file_path.include?(path) }
+    next unless matcher
+  end
+
+  covered_lines, total_lines, line_ratio, missing_lines = line_coverage_from(file_coverage)
+  covered_branches, total_branches, branch_ratio, missing_branches = branch_coverage_from(file_coverage)
+  next if !options[:all] && line_ratio >= 1.0 && branch_ratio >= 1.0
 
   short_path = file_path.start_with?(Dir.getwd) ? file_path[Dir.getwd.length + 1..-1] : file_path
   puts "======== #{short_path}  (#{matcher}) ========"
 
-  line_coverage = file_coverage["lines"]
-  branch_coverage = file_coverage["branches"]
-
-  total_lines = line_coverage.compact.size
   if total_lines.zero?
     puts ""
     puts "  No lines to cover.".green
   else
-    covered_lines = line_coverage.count { |hits| hits && hits > 0 }
     line_coverage_percent = (covered_lines.to_f / total_lines * 100).round(2)
     coverage_string = "  Line Coverage: #{line_coverage_percent}% (#{covered_lines}/#{total_lines})"
     if line_coverage_percent > 99.99
@@ -50,19 +76,13 @@ coverage.each_pair do |file_path, file_coverage|
       puts coverage_string.red
     end
 
-    uncovered_lines = line_coverage
-      .each_with_index
-      .select { |hits, _| hits && hits == 0 }
-      .map { |_, line_index| line_index + 1 }
-    puts "    Uncovered Lines: #{uncovered_lines.join(', ')}".yellow unless uncovered_lines.empty?
+    puts "    Uncovered Lines: #{missing_lines.join(', ')}".yellow unless missing_lines.empty?
   end
 
   if file_coverage.key?("branches")
-    total_branches = branch_coverage.size
-    if file_coverage["branches"].empty?
+    if total_branches.zero?
       puts "  No branches to cover.".green
     else
-      covered_branches = branch_coverage.count { |br| br["coverage"] && br["coverage"] > 0 }
       branch_coverage_percent = (covered_branches.to_f / total_branches * 100).round(2)
       coverage_string = "  Branch Coverage: #{branch_coverage_percent}% (#{covered_branches}/#{total_branches})"
       if branch_coverage_percent > 99.99
@@ -73,8 +93,7 @@ coverage.each_pair do |file_path, file_coverage|
         puts coverage_string.red
       end
 
-      uncovered_branches = branch_coverage.select { |br| br["coverage"] == 0 }
-      branch_snippets = uncovered_branches.map { |br| "#{br['start_line']}-#{br['end_line']}(#{br['type']})" }
+      branch_snippets = missing_branches.map { |br| "#{br['start_line']}-#{br['end_line']}(#{br['type']})" }
       puts "    Uncovered Branches: #{branch_snippets.join(', ')}".yellow unless branch_snippets.empty?
     end
   end

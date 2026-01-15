@@ -2,6 +2,7 @@
 alias vi=nvim
 alias vim=nvim
 alias ba='vim ~/.zsh/aliases; source ~/.zsh/aliases'
+alias ta='vim ~/.zsh/twiddler; source ~/.zsh/twiddler'
 alias zenv="vim ~/.zsh/env_local; source ~/.zsh/env_local"
 alias bar='source ~/.zsh/aliases'
 alias vimrc='vim ~/.config/nvim/init.vim'
@@ -19,10 +20,7 @@ alias rmr='rm -r'
 alias gr="rg -t ruby"
 alias rgn="rg --files-without-match"
 alias rgl="rg -l"
-
-rgj () {
-  rg -l $1 extra/jenkins/
-}
+alias rgg="rg -g 'Gemfile*'"
 
 alias gitroot='git rev-parse --show-toplevel'
 alias cdroot='cd `gitroot`'
@@ -78,11 +76,27 @@ fixssh () {
 	eval `tmux show-env | sed -n 's/^\(SSH_[^=]*\)=\(.*\)/export \1="\2"/p'`
 }
 
+alias jump="fixssh; ssh -A chc0"
+alias git="fixssh; git"
+
+if [ -n "$TMUX" ]; then
+  function fix_ssh {
+    eval $(tmux show-env -s SSH_AUTH_SOCK)
+  }
+else
+  function fix_ssh {}
+fi
+
+function preexec {
+  fix_ssh
+}
+
 ## mki
 alias mbs="mki build status"
 alias mgv="mki gerrit verify"
 alias mgs="mki gerrit status"
 alias cfg="$HOME/bin/checkout_gerrit_cr"
+alias ufg="$HOME/bin/update_gerrit_cr"
 
 fbr () {
 	local branch
@@ -127,13 +141,46 @@ alias cdmdev="cd /var/local/meraki/manage-devel"
 alias start_server="script/server"
 alias start_console="script/console"
 alias start_spring="RAILS_HELPER_DB_CACHE=true script/spring server --background"
-alias test="script/spring rspec"
+alias start_spring5="RAILS_HELPER_DB_CACHE=true script/spring server --rails5 --background"
+alias stest4="script/spring rspec"
+alias stest5="script/spring --rails5 rspec"
+alias test4="script/ruby33 bundle exec rspec"
+alias test5="script/rails5 bundle exec rspec"
 
 alias dspec="CODE_COVERAGE_ENABLED=false debe rspec"
 alias dcov="CODE_COVERAGE_ENABLED=true debe rspec"
 alias rcov="COVERAGE=true bundle exec rspec"
+alias sr="script/spring rspec"
+alias sc="script/spring rails console"
+alias lbrspec="script/ruby33 bundle exec rspec --tag event_machine --tag live_broker --tag with_live_handler_helpers"
+alias lb5="script/rails5 bundle exec rspec --tag event_machine --tag live_broker --tag with_live_handler_helpers"
 
 ### live_broker
 alias run_everything_but_lb="script/server --except broker"
 alias run_lb_now="script/ruby33 bundle exec script/live_broker/run 1"
 alias heart_monitor="script/ruby33 bundle exec script/live_broker/live_broker_heart_monitor.rb --cometd-prefix=$COMETD_PREFIX"
+alias fake_cometd="script/ruby33 bundle exec rackup script/live_broker/e2e_test/fake_cometd.ru -E production"
+alias local_broker="COMETD_PREFIX='http://localhost:9292/cometd/' LOG_DIR=log ONE_PROC=true script/ruby33 bundle exec script/live_broker/run 3"
+alias local_monitor="script/ruby33 bundle exec script/live_broker/live_broker_heart_monitor.rb --cometd-prefix='http://localhost:9292/cometd/' --limit 1"
+
+### PBJ
+alias add_jobs="PCC_BACKGROUND_JOB_USER=nevinera script/ruby33 bundle exec script/pcc/pcc_background_job_queue_is_processing_canary.rb -vc"
+alias run_pbj="script/run_pcc_background_job_daemon_locally.sh | tee log/eriq.pbj.log"
+
+
+get_codex_binary () {
+  CODEX_LOCATION="${HOME}/codex"
+
+  DOWNLOAD_URL=$(curl -s https://api.github.com/repos/openai/codex/releases/latest \
+  | grep "browser_download_url.*codex-x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d '"' -f 4)
+
+  curl -L -o codex.tar.gz "${DOWNLOAD_URL}" \
+  && tar -xzf codex.tar.gz \
+  && mv codex-x86_64-unknown-linux-musl ${CODEX_LOCATION} \
+  && rm codex.tar.gz
+}
+
+
+source $HOME/.zsh/twiddler
+

@@ -29,12 +29,20 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'slim-template/vim-slim'
 " Plug 'dense-analysis/ale'
 Plug 'wellle/context.vim'
+Plug 'github/copilot.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
 call plug#end()
-
 
 " --- keybinds ---
 
 let mapleader=","
+
+" copilot
+map <leader>c :CopilotChatToggle<cr>
+let g:copilot_metrics_enabled = 1
+imap <S-Tab> <Plug>(copilot-accept-word)
+imap <S-Return> <Plug>(copilot-accept-line)
 
 " scroll faster
 nnoremap <c-e> 5<c-e>
@@ -44,6 +52,13 @@ nnoremap <c-y> 5<c-y>
 inoremap <c-d> <esc>
 nnoremap <c-d> <esc>
 inoremap <c-c> <esc>
+
+" forward/backward by word with chord
+inoremap <A-f> <Cmd>normal! w<CR>
+inoremap <A-b> <Cmd>normal! b<CR>
+nnoremap <A-f> w
+nnoremap <A-b> b
+
 
 " pane navigation
 nnoremap <c-j> <c-w>j

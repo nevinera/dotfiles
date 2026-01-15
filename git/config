@@ -59,6 +59,7 @@
   fix = fixup
   ignore-changes = update-index --assume-unchanged
   wip = commit --no-verify --message WIP
+  details = log -n 1
 
 [push]
   default = tracking

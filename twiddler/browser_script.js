@@ -209,12 +209,18 @@ const mapping = {
 
   "--LRRR": "|", "--LMMM": "=", "--LLLL": "_",
 
+  "--RMR-": "[", "--RMM-": "(", "--RML-": "{",
+  "--RM-R": "]", "--RM-M": ")", "--RM-L": "}",
+
+  "--RMRR": "<", "--RMMM": ":", "--RMLL": ">",
+
+
   // Movement
   "4-R---": "<LControl>y</LControl>", "4-M---": "<UpArrow>",      "4-L---": "<PageUp>",
   "4--R--": "<LOption>f</LOption>",   "4--M--": "<RightArrow>",   "4--L--": "<End>",
   "4---R-": "<LOption>b</LOption>",   "4---M-": "<LeftArrow>",    "4---L-": "<Home>",
   "4----R": "<LControl>e</LControl>", "4----M": "<DownArrow>",    "4----L": "<PageDown>",
-
+      
   "4R----": "<LCommand><Tab></LCommand>", // switch apps
   "4M----": "<LCommand>`</LCommand>",     // switch window in app
   "4L----": "<LControl><Tab></LControl>",       // switch tab

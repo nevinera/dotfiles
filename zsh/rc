@@ -72,3 +72,23 @@ if [ -z "${_mise_cmd_not_found:-}" ]; then
         fi
     }
 fi
+
+export PATH="/Users/erimuell/src/nodenv/bin:${PATH}"
+export PATH="/Users/erimuell/.nodenv/shims:${PATH}"
+export NODENV_SHELL=zsh
+command nodenv rehash 2>/dev/null
+nodenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell)
+    eval "$(nodenv "sh-$command" "$@")";;
+  *)
+    command nodenv "$command" "$@";;
+  esac
+}
+

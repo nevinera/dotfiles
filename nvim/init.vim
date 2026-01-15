@@ -29,6 +29,7 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'slim-template/vim-slim'
 Plug 'dense-analysis/ale'
 Plug 'wellle/context.vim'
+Plug 'zbirenbaum/copilot.lua'
 call plug#end()
 
 
